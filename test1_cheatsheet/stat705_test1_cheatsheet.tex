@@ -1,0 +1,131 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.2in]{geometry}
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{2ex}{1ex}
+\titlespacing{\subsection}{0pt}{1.5ex}{1ex}
+\titlespacing{\subsubsection}{0pt}{0.5ex}{0ex}
+\usepackage{amsmath,amsthm,amssymb,MnSymbol}
+\setlength{\parindent}{0in}
+
+%--------------------------------------------------
+% Intermediate Statistics 705 Cheatsheet for Test 1
+%--------------------------------------------------
+
+\begin{document}
+
+\subsection*{Random Variables}
+A \textbf{random variable} X is a map $X:\Omega \rightarrow \mathbb{R}$. For $A \subset \mathbb{R}$ we write
+\begin{equation}
+\mathbb{P}(X \in A) = \mathbb{P}(\{ w \in \Omega : X(w) \in A \})
+\end{equation}
+The \textbf{cdf} $F_{X}$ of X is
+\begin{equation}
+F_{X}(x) = \mathbb{P}(X \leq x)
+\end{equation}
+For continuous X, the \textbf{pdf} $f_{X}$ is a function satisfying
+\begin{equation}
+\int_{A} f_{X}(x)dx = \mathbb{P}(X \in A)
+\end{equation}
+Note that $f_{X} = F_{X}'$.
+
+\subsection*{Transformations}
+Let $Y=g(X)$, $\mathcal{X} = \{x : f_{X}(x) > 0\}$, and $\mathcal{Y} = \{y : y=g(x), x \in \mathcal{X}\}$ \\($\mathcal{X}$ and $\mathcal{Y}$ called the \emph{support} of X and Y). Then $\forall$ $A \subset \mathcal{Y}$
+\begin{equation}
+\mathbb{P}(Y \in A) = \mathbb{P}(X \in \{x : g(x) \in A\})
+\end{equation}
+For the cdf $F_{Y}$
+\begin{equation}
+F_{Y}(y) = \mathbb{P}(X \in \{x : g(x) \leq y \}) = \int_{\{x : g(x) \leq y \}}f_{X}(x)dx
+\end{equation}
+For g monotonic
+\begin{equation}
+F_{Y}(y) =
+\begin{cases}
+F_{X}(g^{-1}(y))& \text{if $g$ increasing} \\
+1 - F_{X}(g^{-1}(y))& \text{if $g$ decreasing}
+\end{cases}
+\end{equation}
+Additionally, for g monotonic, if $g^{-1}(y)$ has a continuous derivative on $\mathcal{Y}$
+\begin{equation}
+f_{Y}(y) = f_{X}(g^{-1}(y)) \left | \frac{dg^{-1}(y)}{dy} \right | \hspace{5mm} \text{for $y \in \mathcal{Y}$}
+\end{equation}
+
+\subsection*{Expected Values}
+The \textbf{mean} or \textbf{expected value} of $g(X)$ is
+\begin{equation}
+\mathbb{E}(g(X)) = \int g(x)dF(x) = \int g(x)dP(x)
+\end{equation}
+Related properties and definitions:
+\begin{flalign}
+(a)& \hspace{2mm} \mu = \mathbb{E}(X) \\
+(b)& \hspace{2mm} \mathbb{E}(\sum_{i} c_{i}g_{i}(X_{i})) = \sum_{i} c_{i} \mathbb{E}(g_{i}(X_{i})) \\
+(c)& \hspace{2mm} \mathbb{E}\left(\prod_{i} X_{i} \right) = \prod_{i} \mathbb{E}(X_{i}), \hspace{4mm} X_{1}, \ldots, X_{n} \text{ indep't} \\
+(d)& \hspace{2mm} Var(X) = \sigma^{2} = \mathbb{E}((X-\mu)^{2}) \hspace{4mm} \text{is the \textbf{variance} of X} \\
+(e)& \hspace{2mm} Var(X) = \mathbb{E}(X^{2}) - \mu^{2} \\
+(f)& \hspace{2mm} Var \left (\sum_{i} a_{i}X_{i} \right ) = \sum_{i} a_{i}^{2} Var(X_{i}), \hspace{4mm} X_{1}, \ldots, X_{n} \text{ indep't} \\
+(g)& \hspace{2mm} Cov(X,Y) = \mathbb{E}((X-\mu_{X})(Y-\mu_{Y})) \hspace{2mm} \text{is the \textbf{covariance}} \\
+(h)& \hspace{2mm} Cov(X,Y) = \mathbb{E}(XY) - \mu_{x}\mu_{Y} \\
+(i)& \hspace{2mm} \rho(X,Y) = Cov(X,Y) / \sigma_{x}\sigma_{y}, \hspace{4mm} -1 \leq \rho(X,Y) \leq 1
+\end{flalign}
+The \textbf{conditional expectation} of Y given X is the random variable $g(X) = \mathbb{E}(Y|X)$, where
+\begin{gather}
+\mathbb{E}(Y|X=x) = \int y f(y|x)dy\\
+\text{and} \hspace{2mm} f(y|x) = f_{X,Y}(x,y) / f_{X}(x)
+\end{gather}
+The \emph{Law of Total/Iterated Expectation} is
+\begin{equation}
+\mathbb{E}(Y) = \mathbb{E}[\mathbb{E}(Y|X)]
+\end{equation}
+The \emph{Law of Total Variance} is
+\begin{equation}
+Var(Y) = Var[\mathbb{E}(Y|X)] + \mathbb{E}[Var(Y|X)]
+\end{equation}
+The \emph{Law of Total Covariance} is
+\begin{equation}
+Cov(X,Y) = \mathbb{E}(Cov(X,Y|Z)) + Cov(\mathbb{E}(X|Z), \mathbb{E}(Y|Z))
+\end{equation}
+
+\subsection*{Moment Generating Function}
+The \textbf{mgf} of X is
+\begin{equation}
+M_{X}(t) = \mathbb{E}(e^{tX})
+\end{equation}
+Properties:
+\begin{flalign}
+(a)& \hspace{2mm} M_{X}^{(n)}(t)|_{t=0} = \mathbb{E}(X^{n}) \hspace{3mm} \text{is the \textbf{$\text{n}^{\text{th}}$ moment} of X} \\
+(b)& \hspace{2mm} M_{x}(t) = M_{Y}(t) \hspace{2mm} \forall t \hspace{2mm} \text{around 0} \implies X\stackrel{d}{=}Y \\
+(c)& \hspace{2mm} M_{aX+b}(t) = e^{bt}M_{X}(at) \\
+(d)& \hspace{2mm} M_{\sum_{i} X_{i}}(t) = \prod_{i} M_{X_{i}}, \hspace{2mm} \text{$X_{1},\ldots,X_{n}$ indep't}
+\end{flalign}
+
+\subsection*{Independence}
+Random variables X and Y are \textbf{independent}, written $X \upmodels Y$, iff
+\begin{equation}
+\mathbb{P}(X \in A, Y \in B) = \mathbb{P}(X \in A) \mathbb{P}(Y \in B)
+\end{equation}
+If (X,Y) is a random vector with pdf $f_{X,Y}$, then
+\begin{equation}
+X \upmodels Y \iff f_{X,Y}(x,y) = f_{X}(x) f_{Y}(y)
+\end{equation}
+
+\subsection*{Distributions}
+Discrete distributions:
+\begin{flalign}
+(a)& \hspace{2mm} \text{Bernoulli} \hspace{2mm} f(x|p) = p^{x}(1-p)^{1-x}, \hspace{3mm} x \in \{0, 1\} \\
+(b)& \hspace{2mm} \text{Binomial} \hspace{2mm} f(x|n,p) = {\binom{n}{x}} p^{x}(1-p)^{n-x}, \hspace{2mm} x \in \{0,1,\ldots,n\} \\
+(c)& \hspace{2mm} \text{Poisson} \hspace{2mm} f(x|\lambda) = \frac{e^{-\lambda}\lambda^{x}}{x!}, \hspace{3mm} x \in \{0, 1, 2, \ldots\}
+\end{flalign}
+
+Continuous distributions:
+\begin{flalign}
+(a)& \hspace{2mm} \text{Uniform} \hspace{2mm} f(x|a,b) = \frac{1}{b-a}, \hspace{3mm} x \in [a,b] \\
+(b)& \hspace{2mm} \text{Normal} \hspace{2mm} f(x|\mu,\sigma^{2}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^{2}/(2\sigma^{2})}, \hspace{2mm} x \in \mathbb{R} \\
+(c)& \hspace{2mm} \text{Gamma} \hspace{2mm} f(x|\alpha,\beta) = \frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}, \hspace{2mm} x \in \mathbb{R}_{+}, \alpha \hspace{1mm}\beta>0
+\end{flalign}
+
+\subsection*{Miscellaneous}
+To include: MGFs and/or CDFs for above distributions. More distributions.
+Misc. useful things: L'H\^{o}pital's rule, Taylor approximation, definitions of e, Leibnitz's Rule.
+
+\end{document}

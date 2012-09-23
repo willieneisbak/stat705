@@ -1,0 +1,72 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.2in]{geometry}
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{2ex}{1ex}
+\titlespacing{\subsection}{0pt}{1.5ex}{1ex}
+\titlespacing{\subsubsection}{0pt}{0.5ex}{0ex}
+\usepackage{amsmath,amsthm,amssymb,MnSymbol}
+\setlength{\parindent}{0in}
+\renewenvironment{proof}{{\bfseries Proof}}{\\}
+
+%--------------------------------------------------
+% Intermediate Statistics 705 Studysheet for Test 2 
+%--------------------------------------------------
+
+\begin{document}
+
+\subsection*{Probability Inequalities}
+\textbf{Thm 1 (Gaussian Tail Inequality):}
+Let $X \sim \mathcal{N}(0,1)$. Then
+\begin{equation}
+    \mathbb{P}(|X| > \epsilon) \leq \frac{2}{\epsilon}e^{-\epsilon^{2}/2}
+\end{equation}
+Additionally:
+\begin{equation}
+\mathbb{P}(|\overline{X}_{n}| > \epsilon) \leq \frac{1}{\sqrt{n}\epsilon}e^{-n\epsilon^{2}/2}
+\end{equation}
+\begin{proof}
+    \mbox{}\\*
+    Note that $f_{X}(x) = (2\pi)^{-1/2}e^{-x^{2}/2}$ \hfill (pdf for $\mathcal{N}(0,1)$) \\
+    $\implies \mathbb{P}(X > \epsilon) = \int_{\epsilon}^{\infty} f_{X}(s) ds$ \hfill (taking upper range w.l.o.g) \\
+    $\leq \frac{1}{\epsilon} \int_{\epsilon}^{\infty} s f_{X}(s) ds$ \hfill (Since $\frac{s}{\epsilon} > \frac{s}{s} \hspace{2mm}\text{in}\hspace{2mm} [\epsilon,\infty)$) \\
+    $= \frac{1}{\epsilon} \int_{\epsilon}^{\infty} f'_{X}(s) ds$ \hfill (taking derivative) \\
+    $= \frac{1}{\epsilon}f_{X}(\epsilon) \leq \frac{1}{\epsilon}e^{-\epsilon^{2}/2}$ \hfill (f.t.c. and bound pdf) \\
+    $\implies \mathbb{P}(|X|>\epsilon) \leq \frac{2}{\epsilon} e^{-\epsilon^{2}/2}$ \hfill (by symmetry of pdf) \\
+    \textbf{Also:}\\
+    For $X_{1}, \ldots, X_{n} \sim \mathcal{N}(0,1)$, $\overline{X}_{n} = n^{-1}\sum_{i}X_{i} \sim \mathcal{N}(0,1/n)$ \\
+    $\implies \overline{X}_{n} \stackrel{d}{=} n^{-1/2}Z$, where $Z \sim \mathcal{N}(0,1)$ \hfill (sample mean identity) \\
+    $\implies \mathbb{P}(|\overline{X}_{n}| > \epsilon) = \mathbb{P}(n^{-1/2}|Z| > \epsilon)$ \\
+    $= \mathbb{P}(|Z| > n^{1/2}\epsilon) \leq \frac{2}{\sqrt{n}\epsilon}e^{-n\epsilon^{2}/2}$ \hfill (using thm for $X \sim \mathcal{N}(0,1)$)
+\end{proof} \\
+    
+\textbf{Thm 2 (Markov Inequality):}
+Let X be a non-negative random variable s.t. $\mathbb{E}(X)$ exists. Then $\forall$ $t>0$
+\begin{equation}
+    \mathbb{P}(X>t) \leq \frac{\mathbb{E}(X)}{t}
+\end{equation}
+\begin{proof}
+    \mbox{}\\*
+    Since $X>0$, $\mathbb{E}(X) = \int_{0}^{\infty}xf_{X}(x)dx$ \hfill (def of $\mathbb{E}(X)$) \\
+    $= \int_{0}^{t}xf_{X}(x)dx + \int_{t}^{\infty}xf_{X}(x)dx$ \hfill (split up integral) \\
+    $\geq \int_{t}^{\infty}xf_{X}(x)dx$ \hfill (keep upper part only) \\
+    $\geq t\int_{t}^{\infty}f_{X}(x)dx$ \hfill ($t \leq x$ for $x \in [t,\infty)$) \\
+    $ = t \mathbb{P}(X > t)$
+\end{proof} \\
+
+\textbf{Thm 3 (Chebyshev's Inequality):}
+Let $\mu = \mathbb{E}(X)$ and $\sigma^{2} = \text{Var}(X)$. Then
+\begin{gather}
+    \mathbb{P}(|X-\mu| \geq t) \leq \frac{\sigma^{2}}{t^{2}} \\
+    \mathbb{P}(|(X-\mu)/\sigma| \geq t) \leq \frac{1}{t^{2}}
+\end{gather}
+\begin{proof}
+    \mbox{}\\*
+    $\mathbb{P}(|X-\mu| \geq t) = \mathbb{P}(|X-\mu|^{2} \geq t^{2})$ \hfill (square both sides) \\
+    $\leq \frac{\mathbb{E}[(X-\mu)^{2}]}{t^{2}} = \frac{\sigma^{2}}{t^{2}}$ \hfill (using Markov's inequality) \\
+    \textbf{Also:} \\
+    The second part follows by setting $t=t\sigma$.
+\end{proof}
+
+
+\end{document}
