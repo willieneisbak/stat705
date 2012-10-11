@@ -15,6 +15,7 @@
 
 \begin{document}
 
+
 \subsection*{Probability Inequalities}
 \textbf{Thm 1 (Gaussian Tail Inequality):}
 Let $X \sim \mathcal{N}(0,1)$. Then
@@ -45,7 +46,7 @@ Let $\mathbb{E}(X) = 0$ and $a \leq X \leq b$. Then
     \mathbb{E}(e^{tX}) \leq e^{t^{2}(b-a)^{2}/8}
 \end{equation}
 
-\textbf{Lemma 5}
+\textbf{Lemma 5:}
 Let $X$ be any random variable. Then
 \begin{equation}
     \mathbb{P}(X>\epsilon) \leq \inf_{t \geq 0} e^{-t\epsilon} \mathbb{E}(e^{tX})
@@ -56,6 +57,134 @@ Let $X$ be any random variable. Then
 $X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i}) = \mu$, $a \leq X_{i} \leq b$. Then $\forall \epsilon >0$
 \begin{equation}
     \mathbb{P}(|\overline{X} - \mu| \geq \epsilon) \leq 2e^{-2n\epsilon^{2}/(b-a)^{2}}
+\end{equation}
+
+\textbf{Thm 9 (McDiarmid):}
+
+\textbf{Thm 12 (Cauchy-Schwartz inequality):}
+
+\textbf{Thm 13 (Jensen's inequality):}
+
+\textbf{Ex 15 (Kullback Leibler distance):}
+
+\textbf{Thm 18?:}
+
+\textbf{$O_{p}$ and $o_{p}$:}
+
+
+\subsection*{Shattering}
+Note: remember uniform bounds and union bound.\\
+$\mathcal{A}$ \textbf{picks out} $G \subset F$.\\
+$S(\mathcal{A},F)$.\\
+$F$ \textbf{shattered} by $\mathcal{A}$ if $S(\mathcal{A},F) = 2^{|F|}$ (ie if $\mathcal{A}$ picks out all $G \subset F$).\\
+The \textbf{shatter coefficient} $s_{n}(\mathcal{A}) = \sup_{F \in \mathcal{F}_{n}} s(\mathcal{A},F)$. Note $n=|F|$ and $s_{n}(\mathcal{A}) \leq 2^{n}$.\\
+\textbf{Thm 5:}\\
+The \textbf{VC dimension} $d(\mathcal{A}) =$ largest $n$ s.t. $s_{n}(\mathcal{A}) = 2^{n}$.
+
+
+\subsection*{Random Samples}
+For $X_{1},\ldots,X_{n} \sim F$ a \textbf{statistic} is any $T = g(X_{1},\ldots,X_{n})$.\\
+E.g. $\overline{X}_{n}$, $S_{n} = \sum_{i}(X_{i}-\overline{X}_{n})^{2} / (n-1)$, $\left(X_{(1)},\ldots,X_{(n)}\right)$\\
+\textbf{Note:} $\mathbb{E}(\overline{X}_{n}) = \mathbb{E}(X_{i})$, $\text{Var}(\overline{X}_{n}) = \text{Var}(X_{i})/n$, $\mathbb{E}(S_{n})^{2} = \text{Var}(X_{i})$.\\
+\textbf{Note:} sum of bernouilli is binomial(n,p), sum of exp(beta) is gamma(n,beta), sum of standard normal is chi-squared(n dof).
+\textbf{Thm. 1}: $X_{1},\ldots,X_{n} \sim \mathcal{N}(\mu,\sigma^{2})$ $\implies$  $\overline{X}_{n} \sim \mathcal{N}(\mu, \sigma^{2}/n)$.
+
+
+\subsection*{Convergence}
+$X,X_{1},X_{2},\ldots$ random variables.\\
+(1) $X_{n}$ converges \textbf{almost surely} $X_{n} \xrightarrow{a.s.} X$ if $\forall \epsilon>0$
+\begin{equation}
+    \mathbb{P}(\lim_{n\rightarrow\infty} |X_{n}-X| < \epsilon) = 1
+\end{equation}
+(2) $X_{n}$ converges \textbf{in probability} $X_{n} \xrightarrow{p} X$ if $\forall \epsilon>0$
+\begin{equation}
+    \lim_{n\rightarrow\infty} \mathbb{P}(|X_{n}-X| > \epsilon) = 0
+\end{equation}
+(3) $X_{n}$ converges \textbf{in quadratic mean} $X_{n} \xrightarrow{qm} X$ if
+\begin{equation}
+    \lim_{n\rightarrow\infty} \mathbb{E}[(X_{n}-X)^{2}] = 0
+\end{equation}
+(4) $X_{n}$ converges \textbf{in distribution} $X_{n} \rightsquigarrow X$ if
+\begin{equation}
+    \lim_{n\rightarrow\infty} F_{X_{n}}(t) = F_{X}(t)
+\end{equation}
+$\forall t$ on which $F_{X}$ is continuous.\\
+
+\textbf{Thm 7:} Conv. a.s. and in q.m. imply conv. in prob. All three imply conv. in distribution. Conv. in distribution to a point-mass also implies conv. in prob.\\
+E.g. from class: Showed conv. in prob $\not\implies$ conv. a.s.. Showed conv. in prob $\not\implies$ conv. in q.m.. Showed conv. in distro $\not\implies$ conv. in prob.
+
+\textbf{Thm 10a:} $X$,$X_{n}$,$Y$,$Y_{n}$ random variables. Then
+\begin{flalign}
+    (a)& \hspace{2mm} X_{n} \xrightarrow{p} X, Y_{n} \xrightarrow{p} Y \implies X_{n} + Y_{n} \xrightarrow{p} X + Y \\
+    (b)& \hspace{2mm} X_{n} \xrightarrow{p} X, Y_{n} \xrightarrow{p} Y \implies X_{n}Y_{n} \xrightarrow{p} XY \\
+    (c)& \hspace{2mm} X_{n} \xrightarrow{qm} X, Y_{n} \xrightarrow{qm} Y \implies X_{n} + Y_{n} \xrightarrow{qm} X + Y
+\end{flalign}
+
+\textbf{Thm 10b (Slutzky's Thm):} $X$,$X_{n}$,$Y_{n}$ random variables. Then
+\begin{flalign}
+    (a)& \hspace{2mm} X_{n} \rightsquigarrow X, Y_{n} \rightsquigarrow c \implies X_{n} + Y_{n} \rightsquigarrow X + c \\
+    (b)& \hspace{2mm} X_{n} \rightsquigarrow X, Y_{n} \rightsquigarrow c \implies X_{n}Y_{n} \rightsquigarrow cX
+\end{flalign}
+
+\textbf{Thm 12 (Law of Large Numbers):} $X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i})=\mu$ $\implies$ $\overline{X}_{n} \xrightarrow{\text{qm}} \mu$.
+
+\textbf{Thm 14 (CLT):} $X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i})=\mu$ $\text{Var}(X_{i}) = \sigma^{2}$\\
+$\implies$ $\sqrt{n}(\overline{X}_{n}-\mu)/\sigma \rightsquigarrow \mathcal{N}(0,1)$\\
+$\implies$ $\overline{X}_{n} \rightsquigarrow \mathcal{N}(\mu,\sigma^{2}/n)$\\
+$\implies$ $\sqrt{n}(\overline{X}_{n}-\mu)/S_{n}\rightsquigarrow \mathcal{N}(0,1)$
+
+\textbf{Thm 18 (delta method):} If $\sqrt{n}(Y_{n}-\mu)/\sigma \rightsquigarrow \mathcal{N}(0,1)$, $g'(\mu) \neq 0$
+$\implies$ $\sqrt{n}(g(Y_{n})-g(\mu))/|g'(\mu)|\sigma \rightsquigarrow \mathcal{N}(0,1)$\\
+ie $Y_{n} \approx \mathcal{N}(\mu,\sigma^{2}/n)$ $\implies$ $g(Y_{n}) \approx \mathcal{N}(g(\mu),g'(\mu)^{2}\sigma^{2}/n)$
+
+\textbf{Thm 18b (2nd order delta method):??} Should I include this?
+
+
+\subsection*{Sufficiency}
+If $X_{1},\ldots,X_{n} \sim p(x;\theta)$, $T$ \textbf{sufficient} for $\theta$ if $p(x^{n}|t;\theta)$ $=$ $p(x^{n}|t)$.
+\textbf{Thm 9 (factorization):} for $X^{n} \sim p(x;\theta)$, $T(X^{n})$ sufficient for $\theta$ if the joint probability can be factorized as.
+\begin{equation}
+    p(x^{n};\theta) = h(x^{n}) \times g(t;\theta)
+\end{equation}
+Sufficient stat $T$ is a \textbf{minimal sufficient statistic (MSS)} if $T = g(U)$ for all other sufficient stats.\\
+\textbf{Thm 15:} $T$ is a MSS if:
+\begin{equation}
+    \frac{p(y^{n};\theta)}{p(x^{n};\theta)} \text{ constant in $\theta$ } \iff T(y^{n}) = T(x^{n})
+\end{equation}
+
+
+\subsection*{Parametric Point Estimation}
+make sure i've defined: $\mathbb{E}_{\theta}(\hat{\theta})$, bias, sampling distro, standard error, $\hat{\theta}_{n}$ consistent.\\
+\textbf{Method of Moments}\\
+\textbf{Maximum Likelihood (MLE)}\\
+\textbf{Bayes Estimation}\\
+\textbf{Mean Squared Error (MSE)}\\
+ex: MSE for normal\\
+\textbf{Bias and Variance}\\
+
+
+\subsection*{Risks and Estimators}
+Let $x^{n} = x_{1},\ldots,x_{n}$.\\
+The \textbf{risk} of an estimator $\hat{\theta} = \hat{\theta}(x^{n})$ for $x^{n} \sim p(x^{n};\theta)$ is
+\begin{equation}
+    R(\theta,\hat{\theta}) = \mathbb{E}[L(\theta,\hat{\theta})] = \int L(\theta,\hat{\theta}) p(x^{n};\theta) dx^{n}
+\end{equation}
+The \textbf{posterior risk} of $\hat{\theta}$ given a prior $\pi(\theta)$ is
+\begin{equation}
+    r(\hat{\theta}|x^{n}) = \int L(\theta,\hat{\theta}) \pi(\theta|x_{1},\ldots,x_{n}) d\theta    
+\end{equation}
+where $\pi(\theta|x^{n}) = \frac{\mathbb{P}(x^{n};\theta)\pi(\theta)}{m(x^{n})}$ is the posterior over $\theta$.\\
+The \textbf{Bayes risk} of $\hat{\theta}$ given a prior $\pi(\theta)$ is
+\begin{equation}
+    B_{\pi}(\hat{\theta}) = \int R(\theta,\hat{\theta}) \pi(\theta) d\theta
+\end{equation}
+The \textbf{max risk} of $\hat{\theta}$ is
+\begin{equation}
+    \overline{R}(\hat{\theta}) = \sup_{\theta \in \Theta} R(\theta,\hat{\theta})
+\end{equation}
+The \textbf{minimax risk} is
+\begin{equation}
+    R_{n} = \inf_{\hat{\theta}} \sup_{\theta \in \Theta} R(\theta,\hat{\theta})
 \end{equation}
 
 
