@@ -86,7 +86,7 @@ The \textbf{VC dimension} $d(\mathcal{A}) =$ largest $n$ s.t. $s_{n}(\mathcal{A}
 For $X_{1},\ldots,X_{n} \sim F$ a \textbf{statistic} is any $T = g(X_{1},\ldots,X_{n})$.\\
 E.g. $\overline{X}_{n}$, $S_{n} = \sum_{i}(X_{i}-\overline{X}_{n})^{2} / (n-1)$, $\left(X_{(1)},\ldots,X_{(n)}\right)$\\
 \textbf{Note:} $\mathbb{E}(\overline{X}_{n}) = \mathbb{E}(X_{i})$, $\text{Var}(\overline{X}_{n}) = \text{Var}(X_{i})/n$, $\mathbb{E}(S_{n})^{2} = \text{Var}(X_{i})$.\\
-\textbf{Note:} sum of bernouilli is binomial(n,p), sum of exp(beta) is gamma(n,beta), sum of standard normal is chi-squared(n dof).
+\textbf{Note:} sum of bernouilli is binomial(n,p), sum of exp(beta) is gamma(n,beta), sum of standard normal is chi-squared(n-dof).
 \textbf{Thm. 1}: $X_{1},\ldots,X_{n} \sim \mathcal{N}(\mu,\sigma^{2})$ $\implies$  $\overline{X}_{n} \sim \mathcal{N}(\mu, \sigma^{2}/n)$.
 
 
@@ -111,7 +111,7 @@ $X,X_{1},X_{2},\ldots$ random variables.\\
 $\forall t$ on which $F_{X}$ is continuous.\\
 
 \textbf{Thm 7:} Conv. a.s. and in q.m. imply conv. in prob. All three imply conv. in distribution. Conv. in distribution to a point-mass also implies conv. in prob.\\
-E.g. from class: Showed conv. in prob $\not\implies$ conv. a.s.. Showed conv. in prob $\not\implies$ conv. in q.m.. Showed conv. in distro $\not\implies$ conv. in prob.
+Ex from class: Showed conv. in prob $\not\implies$ conv. a.s.. Showed conv. in prob $\not\implies$ conv. in q.m.. Showed conv. in distro $\not\implies$ conv. in prob.
 
 \textbf{Thm 10a:} $X$,$X_{n}$,$Y$,$Y_{n}$ random variables. Then
 \begin{flalign}
@@ -146,7 +146,7 @@ If $X_{1},\ldots,X_{n} \sim p(x;\theta)$, $T$ \textbf{sufficient} for $\theta$ i
 \begin{equation}
     p(x^{n};\theta) = h(x^{n}) \times g(t;\theta)
 \end{equation}
-Sufficient stat $T$ is a \textbf{minimal sufficient statistic (MSS)} if $T = g(U)$ for all other sufficient stats.\\
+$T$ is a \textbf{minimal sufficient statistic (MSS)} if $T$ is sufficient and $T = g(U)$ for all other sufficient stats $U$.\\
 \textbf{Thm 15:} $T$ is a MSS if:
 \begin{equation}
     \frac{p(y^{n};\theta)}{p(x^{n};\theta)} \text{ constant in $\theta$ } \iff T(y^{n}) = T(x^{n})
@@ -155,37 +155,63 @@ Sufficient stat $T$ is a \textbf{minimal sufficient statistic (MSS)} if $T = g(U
 
 \subsection*{Parametric Point Estimation}
 make sure i've defined: $\mathbb{E}_{\theta}(\hat{\theta})$, bias, sampling distro, standard error, $\hat{\theta}_{n}$ consistent.\\
-\textbf{Method of Moments}\\
-\textbf{Maximum Likelihood (MLE)}\\
-\textbf{Bayes Estimation}\\
-\textbf{Mean Squared Error (MSE)}\\
-ex: MSE for normal\\
-\textbf{Bias and Variance}\\
+\textbf{Method of Moments:} Define equations\\
+(a) \hspace{3mm} $(\sum_{i} X_{i})/n = \mathbb{E}_{\hat{\theta}}(X_{i})$\\
+(b) \hspace{3mm} $(\sum_{i} X_{i}^{2})/n = \mathbb{E}_{\hat{\theta}}(X_{i}^{2})$\\
+(c) \hspace{3mm} $\ldots$ \\
+And solve for $\hat{\theta}$.\\
+\textbf{Maximum Likelihood (MLE):} The MLE is
+\begin{equation}
+\hat{\theta} = \text{arg}\min_{\theta} L(\theta) = \text{arg}\min_{\theta} l(\theta)
+\end{equation}
+Often suffices to solve for $\theta$ in $\frac{\partial l(\theta)}{\partial \theta} = 0$.
+The MLE is \textbf{equivariant} $\implies$ if $\eta = g(\theta)$ then $\hat{\eta} = g(\theta)$. \\
+\textbf{Bayes Estimation:} For prior $\pi(\theta)$, choose 
+\begin{equation}
+    \hat{\theta} = \mathbb{E}(\theta|x^{n}) = \int \theta \pi(\theta|x^{n}) d\pi
+\end{equation}
+\textbf{Mean Squared Error (MSE):} The MSE is
+\begin{equation}
+    \text{MSE} = \mathbb{E}(\hat{\theta} - \theta)^{2} = \int (\hat{\theta}-\theta)^{2} p(x^{n};\theta)dx^{n} = \text{bias}({\hat{\theta}})^{2} + Var(\hat{\theta})
+\end{equation}
+Notes: $\text{\textbf{bias}}(\hat{\theta})$ $=$ $\mathbb{E}(\hat{\theta}) - \theta$. We say $\hat{\theta}$ is \textbf{consistent} if $\hat{\theta} = \hat{\theta}_{n} \xrightarrow{p} \theta$. The \textbf{standard error} of $\hat{\theta}$, $\text{se}(\hat{\theta})$, is the standard deviation of $\hat{\theta}$.\\
+Ex (in class): MSE for normal.
 
 
 \subsection*{Risks and Estimators}
-Let $x^{n} = x_{1},\ldots,x_{n}$.\\
-The \textbf{risk} of an estimator $\hat{\theta} = \hat{\theta}(x^{n})$ for $x^{n} \sim p(x^{n};\theta)$ is
+$L(\theta,\hat{\theta})$ is the \textbf{loss} of an estimator $\hat{\theta} = \hat{\theta}(x^{n})$ for $x^{n} \sim p(x^{n};\theta)$.\\
+The \textbf{risk} of $\hat{\theta}$ is
 \begin{equation}
     R(\theta,\hat{\theta}) = \mathbb{E}[L(\theta,\hat{\theta})] = \int L(\theta,\hat{\theta}) p(x^{n};\theta) dx^{n}
+\end{equation}
+When $L(\theta,\hat{\theta}) = (\theta-\hat{\theta})^{2}$, the risk is the MSE.\\
+The \textbf{max risk} of $\hat{\theta}$ over a set $\theta \in \Theta$ is
+\begin{equation}
+    \overline{R}(\hat{\theta}) = \sup_{\theta \in \Theta} R(\theta,\hat{\theta})
+\end{equation}
+%The \textbf{minimax risk} is
+%\begin{equation}
+    %R_{n} = \inf_{\hat{\theta}} \sup_{\theta \in \Theta} R(\theta,\hat{\theta})
+%\end{equation}
+The \textbf{minimax estimator} is
+\begin{equation}
+    \hat{\theta} = \text{arg}\inf_{\hat{\theta}} \overline{R}(\hat{\theta})
+\end{equation}
+The \textbf{Bayes risk} of $\hat{\theta}$ given a prior $\pi(\theta)$ is
+\begin{equation}
+    B_{\pi}(\hat{\theta}) = \int R(\theta,\hat{\theta}) \pi(\theta) d\theta
 \end{equation}
 The \textbf{posterior risk} of $\hat{\theta}$ given a prior $\pi(\theta)$ is
 \begin{equation}
     r(\hat{\theta}|x^{n}) = \int L(\theta,\hat{\theta}) \pi(\theta|x_{1},\ldots,x_{n}) d\theta    
 \end{equation}
 where $\pi(\theta|x^{n}) = \frac{\mathbb{P}(x^{n};\theta)\pi(\theta)}{m(x^{n})}$ is the posterior over $\theta$.\\
-The \textbf{Bayes risk} of $\hat{\theta}$ given a prior $\pi(\theta)$ is
+The \textbf{Bayes estimator} is
 \begin{equation}
-    B_{\pi}(\hat{\theta}) = \int R(\theta,\hat{\theta}) \pi(\theta) d\theta
+    \hat{\theta} = \text{arg}\inf_{\hat{\theta}} B_{\pi}(\hat{\theta}) = \text{arg}\inf_{\hat{\theta}} r(\hat{\theta}|x^{n})
 \end{equation}
-The \textbf{max risk} of $\hat{\theta}$ is
-\begin{equation}
-    \overline{R}(\hat{\theta}) = \sup_{\theta \in \Theta} R(\theta,\hat{\theta})
-\end{equation}
-The \textbf{minimax risk} is
-\begin{equation}
-    R_{n} = \inf_{\hat{\theta}} \sup_{\theta \in \Theta} R(\theta,\hat{\theta})
-\end{equation}
-
+which equals $\mathbb{E}(\theta|x^{n})$ when $L(\theta,\hat{\theta}) = (\theta-\hat{\theta})^{2}$.\\
+\textbf{Thm 10:} If $\hat{\theta}$ is a Bayes estimator for some prior $\pi$ and $R(\theta,\hat{\theta})$ is constant, then $\hat{\theta}$ is a minimax estimator.\\
+\textbf{Note:} The MLE is approximately minimax (as n increases, if dimension of the parameter is fixed).
 
 \end{document}
