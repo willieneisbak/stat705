@@ -1,0 +1,62 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.2in]{geometry}
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{2ex}{1ex}
+\titlespacing{\subsection}{0pt}{1.5ex}{1ex}
+\titlespacing{\subsubsection}{0pt}{0.5ex}{0ex}
+\usepackage{amsmath,amsthm,amssymb,MnSymbol}
+\setlength{\parindent}{0in}
+\renewenvironment{proof}{{\bfseries Proof}}{\\}
+
+%--------------------------------------------------
+% Intermediate Statistics 705 Studysheet for Test 2 
+%--------------------------------------------------
+
+\begin{document}
+
+\subsection*{Probability Inequalities}
+\textbf{Thm 1 (Gaussian Tail Inequality):}
+Let $X \sim \mathcal{N}(0,1)$. Then
+\begin{equation}
+    \mathbb{P}(|X| > \epsilon) \leq \frac{2}{\epsilon}e^{-\epsilon^{2}/2}
+\end{equation}
+Additionally:
+\begin{equation}
+\mathbb{P}(|\overline{X}_{n}| > \epsilon) \leq \frac{1}{\sqrt{n}\epsilon}e^{-n\epsilon^{2}/2}
+\end{equation}
+    
+\textbf{Thm 2 (Markov Inequality):}
+Let X be a non-negative random variable s.t. $\mathbb{E}(X)$ exists. Then $\forall$ $t>0$
+\begin{equation}
+    \mathbb{P}(X>t) \leq \frac{\mathbb{E}(X)}{t}
+\end{equation}
+
+\textbf{Thm 3 (Chebyshev's Inequality):}
+Let $\mu = \mathbb{E}(X)$ and $\sigma^{2} = \text{Var}(X)$. Then
+\begin{gather}
+    \mathbb{P}(|X-\mu| \geq t) \leq \frac{\sigma^{2}}{t^{2}} \\
+    \mathbb{P}(|(X-\mu)/\sigma| \geq t) \leq \frac{1}{t^{2}}
+\end{gather}
+
+\textbf{Lemma 4:}
+Let $\mathbb{E}(X) = 0$ and $a \leq X \leq b$. Then
+\begin{equation}
+    \mathbb{E}(e^{tX}) \leq e^{t^{2}(b-a)^{2}/8}
+\end{equation}
+
+\textbf{Lemma 5}
+Let $X$ be any random variable. Then
+\begin{equation}
+    \mathbb{P}(X>\epsilon) \leq \inf_{t \geq 0} e^{-t\epsilon} \mathbb{E}(e^{tX})
+    %\mathbb{P}(X>\epsilon) \leq \underset{t \geq 0}{\text{inf}} e^{-t\epsilon} \mathbb{E}(e^{tX})
+\end{equation}
+
+\textbf{Thm 6 (Hoeffding's Inequality):}
+$X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i}) = \mu$, $a \leq X_{i} \leq b$. Then $\forall \epsilon >0$
+\begin{equation}
+    \mathbb{P}(|\overline{X} - \mu| \geq \epsilon) \leq 2e^{-2n\epsilon^{2}/(b-a)^{2}}
+\end{equation}
+
+
+\end{document}
