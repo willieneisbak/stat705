@@ -59,7 +59,12 @@ $X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i}) = \mu$, $a \leq X_{i} \leq b$. Then
     \mathbb{P}(|\overline{X} - \mu| \geq \epsilon) \leq 2e^{-2n\epsilon^{2}/(b-a)^{2}}
 \end{equation}
 
-\textbf{Thm 9 (McDiarmid):}
+\textbf{Thm 9 (McDiarmid):} $X_{1},\ldots,X_{n}$ indep't. If\\
+$\sup_{x_{1},\ldots,x_{n},x'_{i}} \left| g(x_{1},\ldots,x_{n}) - g_{i}^{*}(x_{1},\ldots,x_{n}) \right|$ $\leq c_{i}$ $\forall i$, $\implies$
+\begin{equation}
+    \mathbb{P} \left(g(X_{1},\ldots,X_{n})-\mathbb{E}(g(X_{1},\ldots,X_{n})) \geq \epsilon \right) \leq e^{-2\epsilon^{2}/\sum_{i}c_{i}^{2}}
+\end{equation}
+where $g_{i}^{*} = g$ with $x_{i}$ replaced by $x'_{i}$.
 
 \textbf{Thm 12 (Cauchy-Schwartz inequality):}
 
@@ -67,26 +72,28 @@ $X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i}) = \mu$, $a \leq X_{i} \leq b$. Then
 
 \textbf{Ex 15 (Kullback Leibler distance):}
 
-\textbf{Thm 18?:}
+\textbf{Thm 18:}
 
-\textbf{$O_{p}$ and $o_{p}$:}
-
+\textbf{$O_{p}$ and $o_{p}$:} $X_{n} = o_{p}(1)$ if $\forall$ $\epsilon>0$, $\lim_{n\rightarrow\infty} \mathbb{P}(|X_{n}|>\epsilon) = 0$.\\
+$X_{n} = O_{p}(1)$ if $\forall$ $\epsilon>0$, $\exists$ $C>0$ s.t. $\lim_{n\rightarrow\infty} \mathbb{P}(|X_{n}|>C) \leq \epsilon$. \\
+$X_{n} = o_{p}(a_{n})$ if $X_{n}/a_{n} = o_{p}(1)$ and $X_{n} = O_{p}(a_{n})$ if $X_{n}/a_{n} = O_{p}(1).$
 
 \subsection*{Shattering}
 Note: remember uniform bounds and union bound.\\
-$\mathcal{A}$ \textbf{picks out} $G \subset F$.\\
-$S(\mathcal{A},F)$.\\
-$F$ \textbf{shattered} by $\mathcal{A}$ if $S(\mathcal{A},F) = 2^{|F|}$ (ie if $\mathcal{A}$ picks out all $G \subset F$).\\
-The \textbf{shatter coefficient} $s_{n}(\mathcal{A}) = \sup_{F \in \mathcal{F}_{n}} s(\mathcal{A},F)$. Note $n=|F|$ and $s_{n}(\mathcal{A}) \leq 2^{n}$.\\
-\textbf{Thm 5:}\\
-The \textbf{VC dimension} $d(\mathcal{A}) =$ largest $n$ s.t. $s_{n}(\mathcal{A}) = 2^{n}$.
+$F$ a finite set, $|F| = n$, and $G \subset F$. $\mathcal{A}$ is a class of sets.\\
+$\mathcal{A}$ \textbf{picks out} $G$ if $\exists A \in \mathcal{A}$ s.t. $A \cap F = G$.\\
+Let $S(\mathcal{A},F)$ $=$ $|\{G \subset F \text{ picked out by } \mathcal{A}\}|$ $\leq 2^{n}$.\\
+$F$ is \textbf{shattered} by $\mathcal{A}$ if $S(\mathcal{A},F) = 2^{n}$ (ie if $\mathcal{A}$ picks out all $G \subset F$).\\
+Let $\mathcal{F}_{n}$ be all finite sets with $n$ elements.\\
+The \textbf{shatter coefficient} $s_{n}(\mathcal{A}) = \sup_{F \in \mathcal{F}_{n}} s(\mathcal{A},F) \leq 2^{n}$.\\
+The \textbf{VC dimension} $d(\mathcal{A}) =$ the largest $n$ s.t. $s_{n}(\mathcal{A}) = 2^{n}$.\\
+\textbf{Thm 5:} $\forall \epsilon>0$, $\mathbb{P}(\sup_{A \in \mathcal{A}} |P_{n}(A) - P(A)| > \epsilon) \leq 8 s_{n}(\mathcal{A})e^{-n\epsilon^{2}/32}$
 
 
 \subsection*{Random Samples}
 For $X_{1},\ldots,X_{n} \sim F$ a \textbf{statistic} is any $T = g(X_{1},\ldots,X_{n})$.\\
 E.g. $\overline{X}_{n}$, $S_{n} = \sum_{i}(X_{i}-\overline{X}_{n})^{2} / (n-1)$, $\left(X_{(1)},\ldots,X_{(n)}\right)$\\
-\textbf{Note:} $\mathbb{E}(\overline{X}_{n}) = \mathbb{E}(X_{i})$, $\text{Var}(\overline{X}_{n}) = \text{Var}(X_{i})/n$, $\mathbb{E}(S_{n})^{2} = \text{Var}(X_{i})$.\\
-\textbf{Note:} sum of bernouilli is binomial(n,p), sum of exp(beta) is gamma(n,beta), sum of standard normal is chi-squared(n-dof).
+\textbf{Notes:} $\mathbb{E}(\overline{X}_{n}) = \mathbb{E}(X_{i})$, $\text{Var}(\overline{X}_{n}) = \text{Var}(X_{i})/n$, $\mathbb{E}(S_{n})^{2} = \text{Var}(X_{i})$, $X_{1,\ldots,n}$ $\sim$ $\text{Bern}(p)$ $\implies$ $\sum_{i} X_{i}$ $\sim$ $\text{Bin}(n,p)$, $X_{1,\ldots,n} \sim \text{Exp}(\beta)$ $\implies$ $\sum_{i}X_{i}$ $\sim$ $\Gamma(n,\beta)$, $X_{1,\ldots,n} \sim \mathcal{N}(0,1)$ $\implies$ $\sum_{i}X_{i}^{2} \sim \chi_{n}$. \\
 \textbf{Thm. 1}: $X_{1},\ldots,X_{n} \sim \mathcal{N}(\mu,\sigma^{2})$ $\implies$  $\overline{X}_{n} \sim \mathcal{N}(\mu, \sigma^{2}/n)$.
 
 
@@ -98,7 +105,7 @@ $X,X_{1},X_{2},\ldots$ random variables.\\
 \end{equation}
 (2) $X_{n}$ converges \textbf{in probability} $X_{n} \xrightarrow{p} X$ if $\forall \epsilon>0$
 \begin{equation}
-    \lim_{n\rightarrow\infty} \mathbb{P}(|X_{n}-X| > \epsilon) = 0
+    \lim_{n\rightarrow\infty} \mathbb{P}(|X_{n}-X| < \epsilon) = 1 
 \end{equation}
 (3) $X_{n}$ converges \textbf{in quadratic mean} $X_{n} \xrightarrow{qm} X$ if
 \begin{equation}
@@ -111,7 +118,7 @@ $X,X_{1},X_{2},\ldots$ random variables.\\
 $\forall t$ on which $F_{X}$ is continuous.\\
 
 \textbf{Thm 7:} Conv. a.s. and in q.m. imply conv. in prob. All three imply conv. in distribution. Conv. in distribution to a point-mass also implies conv. in prob.\\
-Ex from class: Showed conv. in prob $\not\implies$ conv. a.s.. Showed conv. in prob $\not\implies$ conv. in q.m.. Showed conv. in distro $\not\implies$ conv. in prob.
+%Ex from class: Showed conv. in prob $\not\implies$ conv. a.s.. Showed conv. in prob $\not\implies$ conv. in q.m.. Showed conv. in distro $\not\implies$ conv. in prob.
 
 \textbf{Thm 10a:} $X$,$X_{n}$,$Y$,$Y_{n}$ random variables. Then
 \begin{flalign}
@@ -162,10 +169,10 @@ make sure i've defined: $\mathbb{E}_{\theta}(\hat{\theta})$, bias, sampling dist
 And solve for $\hat{\theta}$.\\
 \textbf{Maximum Likelihood (MLE):} The MLE is
 \begin{equation}
-\hat{\theta} = \text{arg}\min_{\theta} L(\theta) = \text{arg}\min_{\theta} l(\theta)
+\hat{\theta} = \text{arg}\max_{\theta} L(\theta) = \text{arg}\max_{\theta} l(\theta)
 \end{equation}
 Often suffices to solve for $\theta$ in $\frac{\partial l(\theta)}{\partial \theta} = 0$.
-The MLE is \textbf{equivariant} $\implies$ if $\eta = g(\theta)$ then $\hat{\eta} = g(\theta)$. \\
+The MLE is \textbf{equivariant} $\implies$ if $\eta = g(\theta)$ then $\hat{\eta} = g(\hat{\theta})$. \\
 \textbf{Bayes Estimation:} For prior $\pi(\theta)$, choose 
 \begin{equation}
     \hat{\theta} = \mathbb{E}(\theta|x^{n}) = \int \theta \pi(\theta|x^{n}) d\pi
@@ -174,13 +181,12 @@ The MLE is \textbf{equivariant} $\implies$ if $\eta = g(\theta)$ then $\hat{\eta
 \begin{equation}
     \text{MSE} = \mathbb{E}(\hat{\theta} - \theta)^{2} = \int (\hat{\theta}-\theta)^{2} p(x^{n};\theta)dx^{n} = \text{bias}({\hat{\theta}})^{2} + Var(\hat{\theta})
 \end{equation}
-Notes: $\text{\textbf{bias}}(\hat{\theta})$ $=$ $\mathbb{E}(\hat{\theta}) - \theta$. We say $\hat{\theta}$ is \textbf{consistent} if $\hat{\theta} = \hat{\theta}_{n} \xrightarrow{p} \theta$. The \textbf{standard error} of $\hat{\theta}$, $\text{se}(\hat{\theta})$, is the standard deviation of $\hat{\theta}$.\\
-Ex (in class): MSE for normal.
+Defs: $\text{\textbf{bias}}(\hat{\theta})$ $=$ $\mathbb{E}(\hat{\theta}) - \theta$. We say $\hat{\theta}$ is \textbf{consistent} if $\hat{\theta} = \hat{\theta}_{n} \xrightarrow{p} \theta$. The \textbf{standard error} of $\hat{\theta}$, $\text{se}(\hat{\theta})$, is the standard deviation of $\hat{\theta}$.\\
 
 
 \subsection*{Risks and Estimators}
 $L(\theta,\hat{\theta})$ is the \textbf{loss} of an estimator $\hat{\theta} = \hat{\theta}(x^{n})$ for $x^{n} \sim p(x^{n};\theta)$.\\
-The \textbf{risk} of $\hat{\theta}$ is
+The \textbf{risk} of this $\hat{\theta}$ is
 \begin{equation}
     R(\theta,\hat{\theta}) = \mathbb{E}[L(\theta,\hat{\theta})] = \int L(\theta,\hat{\theta}) p(x^{n};\theta) dx^{n}
 \end{equation}
@@ -203,15 +209,68 @@ The \textbf{Bayes risk} of $\hat{\theta}$ given a prior $\pi(\theta)$ is
 \end{equation}
 The \textbf{posterior risk} of $\hat{\theta}$ given a prior $\pi(\theta)$ is
 \begin{equation}
-    r(\hat{\theta}|x^{n}) = \int L(\theta,\hat{\theta}) \pi(\theta|x_{1},\ldots,x_{n}) d\theta    
+    r(\hat{\theta}|x^{n}) = \int L(\theta,\hat{\theta}) \pi(\theta|x^{n}) d\theta    
 \end{equation}
 where $\pi(\theta|x^{n}) = \frac{\mathbb{P}(x^{n};\theta)\pi(\theta)}{m(x^{n})}$ is the posterior over $\theta$.\\
 The \textbf{Bayes estimator} is
 \begin{equation}
     \hat{\theta} = \text{arg}\inf_{\hat{\theta}} B_{\pi}(\hat{\theta}) = \text{arg}\inf_{\hat{\theta}} r(\hat{\theta}|x^{n})
 \end{equation}
-which equals $\mathbb{E}(\theta|x^{n})$ when $L(\theta,\hat{\theta}) = (\theta-\hat{\theta})^{2}$.\\
+which equals the posterior mean $\mathbb{E}(\theta|x^{n})$ when $L(\theta,\hat{\theta}) = (\theta-\hat{\theta})^{2}$, the posterior median when $L(\theta,\hat{\theta}) = |\theta-\hat{\theta}|$, and the posterior mode when $L(\theta,\hat{\theta}) = \mathbb{I}[\theta \neq \hat{\theta}]$.\\
 \textbf{Thm 10:} If $\hat{\theta}$ is a Bayes estimator for some prior $\pi$ and $R(\theta,\hat{\theta})$ is constant, then $\hat{\theta}$ is a minimax estimator.\\
 \textbf{Note:} The MLE is approximately minimax (as n increases, if dimension of the parameter is fixed).
+
+
+\subsection*{Distributions}
+Discrete distributions:
+\begin{flalign}
+(a)& \hspace{2mm} \text{Bernoulli} \hspace{2mm} f(x|p) = p^{x}(1-p)^{1-x}, \hspace{3mm} x \in \{0, 1\} \\
+(b)& \hspace{2mm} \text{Binomial} \hspace{2mm} f(x|n,p) = {\binom{n}{x}} p^{x}(1-p)^{n-x}, \hspace{2mm} x \in \{0,1,\ldots,n\} \\
+(c)& \hspace{2mm} \text{Poisson} \hspace{2mm} f(x|\lambda) = \frac{e^{-\lambda}\lambda^{x}}{x!}, \hspace{3mm} x \in \{0, 1, 2, \ldots\}
+\end{flalign}
+
+Continuous distributions:
+\begin{flalign}
+(a)& \hspace{2mm} \text{Uniform} \hspace{2mm} f(x|a,b) = \frac{1}{b-a}, \hspace{3mm} x \in [a,b] \\
+(b)& \hspace{2mm} \text{Normal} \hspace{2mm} f(x|\mu,\sigma^{2}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^{2}/(2\sigma^{2})}, \hspace{2mm} x \in \mathbb{R} \\
+(c)& \hspace{2mm} \text{Gamma} \hspace{2mm} f(x|\alpha,\beta) = \frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}, \hspace{2mm} x \in \mathbb{R}_{+}, \alpha \hspace{1mm}\beta>0
+\end{flalign}
+
+
+\subsection*{Expected Values}
+The \textbf{mean} or \textbf{expected value} of $g(X)$ is
+\begin{equation}
+\mathbb{E}(g(X)) = \int g(x)dF(x) = \int g(x)dP(x)
+\end{equation}
+Related properties and definitions:
+\begin{flalign}
+(a)& \hspace{2mm} \mu = \mathbb{E}(X) \\
+(b)& \hspace{2mm} \mathbb{E}(\sum_{i} c_{i}g_{i}(X_{i})) = \sum_{i} c_{i} \mathbb{E}(g_{i}(X_{i})) \\
+(c)& \hspace{2mm} \mathbb{E}\left(\prod_{i} X_{i} \right) = \prod_{i} \mathbb{E}(X_{i}), \hspace{4mm} X_{1}, \ldots, X_{n} \text{ indep't} \\
+(d)& \hspace{2mm} Var(X) = \sigma^{2} = \mathbb{E}((X-\mu)^{2}) \hspace{4mm} \text{is the \textbf{variance} of X} \\
+(e)& \hspace{2mm} Var(X) = \mathbb{E}(X^{2}) - \mu^{2} \\
+(f)& \hspace{2mm} Var \left (\sum_{i} a_{i}X_{i} \right ) = \sum_{i} a_{i}^{2} Var(X_{i}), \hspace{4mm} X_{1}, \ldots, X_{n} \text{ indep't} \\
+(g)& \hspace{2mm} Cov(X,Y) = \mathbb{E}((X-\mu_{X})(Y-\mu_{Y})) \hspace{2mm} \text{is the \textbf{covariance}} \\
+(h)& \hspace{2mm} Cov(X,Y) = \mathbb{E}(XY) - \mu_{x}\mu_{Y} \\
+(i)& \hspace{2mm} \rho(X,Y) = Cov(X,Y) / \sigma_{x}\sigma_{y}, \hspace{4mm} -1 \leq \rho(X,Y) \leq 1
+\end{flalign}
+The \textbf{conditional expectation} of Y given X is the random variable $g(X) = \mathbb{E}(Y|X)$, where
+\begin{gather}
+\mathbb{E}(Y|X=x) = \int y f(y|x)dy\\
+\text{and} \hspace{2mm} f(y|x) = f_{X,Y}(x,y) / f_{X}(x)
+\end{gather}
+The \emph{Law of Total/Iterated Expectation} is
+\begin{equation}
+\mathbb{E}(Y) = \mathbb{E}[\mathbb{E}(Y|X)]
+\end{equation}
+The \emph{Law of Total Variance} is
+\begin{equation}
+Var(Y) = Var[\mathbb{E}(Y|X)] + \mathbb{E}[Var(Y|X)]
+\end{equation}
+The \emph{Law of Total Covariance} is
+\begin{equation}
+Cov(X,Y) = \mathbb{E}(Cov(X,Y|Z)) + Cov(\mathbb{E}(X|Z), \mathbb{E}(Y|Z))
+\end{equation}
+
 
 \end{document}
