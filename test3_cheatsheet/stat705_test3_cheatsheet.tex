@@ -124,7 +124,9 @@ The \textbf{p-value} $p(x^{n})$ is the smallest $\alpha$-level s.t. we reject $H
 
 \subsubsection*{Permutation Test}
 $X^{n} \sim F$, $Y^{m} \sim G$, $H_{0}:F=G$, $H_{1}:F \neq G$\\
-Let $Z=(X^{n},Y^{m})$ and $L=(1,\ldots,1,2,\ldots,2)$.
+Let $Z=(X^{n},Y^{m})$ and $L=(1,\ldots,1,2,\ldots,2)$.\\
+Let $W = g(L,Z) = |(\text{ave of 1 labeled pts}) - (\text{ave of 2 labeled pts})|$.
+Let $p = \frac{1}{N!}\sum_{\pi} \mathbb{I}\left( g(L_{\pi},Z) > g(L,Z) \right)$ $\implies$ reject $H_{0}$ when $p<\alpha$.
 
 \subsection*{Confidence Intervals}
 We want a $1-\alpha$ \textbf{confidence interval} $C_{n} = [L(X^{n}),U(X^{n})]$ s.t.\\
@@ -140,8 +142,133 @@ Prob inequalities give (for eg.) $\mathbb{P}(|\hat{\theta}_{n} - \theta| > \epsi
 \subsubsection*{Inverting a Test}
 In level-$\alpha$ tests $\mathbb{P}_{\theta_{0}}(T(x^{n}) \in R) = \alpha$ $\Rightarrow$ let $C_{n} = \{ \theta : T(x^{n}) \in A(\theta) \}$.
     $\text{ }\hspace{1mm}$where $A(\theta) = \{ T(x^{n}) \notin R \text{ s.t. } \theta = \theta_{0} \}$ (accept region if $\theta$ is null).\\
+For Wald: $C_{n} = W_{n} \pm (z_{\alpha/2} \times se) = W_{n} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$.\\
+For LRT: $C_{n} = \{ \theta : \frac{L(\theta)}{L(\hat{\theta})} > c \}$ (for test where reject $H_{0}$ if $\frac{L(\theta_{0})}{L(\hat{\theta})} \leq c$).
 
 \subsubsection*{Pivots}
+$Q(X^{n},\theta)$ a \textbf{pivot} if the distribution of $Q$ does not depend on $\theta$.\\
+Find $a$, $b$ s.t. $\mathbb{P}_{\theta}(a \leq Q(X^{n},\theta) \leq b) \geq 1-\alpha$, $\forall \theta$.\\
+\newlinetab $\implies$ $C_{n} = \{ \theta : a \leq Q(X^{n},\theta) \leq b) \geq 1-\alpha \}$.
+
+
+% --------------
+% Older material
+% --------------
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% from test2_cheatsheet
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Random Samples}
+For $X_{1},\ldots,X_{n} \sim F$ a \textbf{statistic} is any $T = g(X_{1},\ldots,X_{n})$.\\
+E.g. $\overline{X}_{n}$, $S_{n} = \sum_{i}(X_{i}-\overline{X}_{n})^{2} / (n-1)$, $\left(X_{(1)},\ldots,X_{(n)}\right)$\\
+\textbf{Notes:} $\mathbb{E}(\overline{X}_{n}) = \mathbb{E}(X_{i})$, $\text{Var}(\overline{X}_{n}) = \text{Var}(X_{i})/n$, $\mathbb{E}(S_{n})^{2} = \text{Var}(X_{i})$, $X_{1,\ldots,n}$ $\sim$ $\text{Bern}(p)$ $\implies$ $\sum_{i} X_{i}$ $\sim$ $\text{Bin}(n,p)$, $X_{1,\ldots,n} \sim \text{Exp}(\beta)$ $\implies$ $\sum_{i}X_{i}$ $\sim$ $\Gamma(n,\beta)$, $X_{1,\ldots,n} \sim \mathcal{N}(0,1)$ $\implies$ $\sum_{i}X_{i}^{2} \sim \chi_{n}$. \\
+\textbf{Thm. 1}: $X_{1},\ldots,X_{n} \sim \mathcal{N}(\mu,\sigma^{2})$ $\implies$  $\overline{X}_{n} \sim \mathcal{N}(\mu, \sigma^{2}/n)$.
+
+\subsection*{Convergence}
+$X,X_{1},X_{2},\ldots$ random variables.\\
+(1) $X_{n}$ converges \textbf{almost surely} $X_{n} \xrightarrow{a.s.} X$ if $\forall \epsilon>0$
+\begin{equation}
+    \mathbb{P}(\lim_{n\rightarrow\infty} |X_{n}-X| < \epsilon) = 1
+\end{equation}
+(2) $X_{n}$ converges \textbf{in probability} $X_{n} \xrightarrow{p} X$ if $\forall \epsilon>0$
+\begin{equation}
+    \lim_{n\rightarrow\infty} \mathbb{P}(|X_{n}-X| < \epsilon) = 1 
+\end{equation}
+(3) $X_{n}$ converges \textbf{in quadratic mean} $X_{n} \xrightarrow{qm} X$ if
+\begin{equation}
+    \lim_{n\rightarrow\infty} \mathbb{E}[(X_{n}-X)^{2}] = 0
+\end{equation}
+(4) $X_{n}$ converges \textbf{in distribution} $X_{n} \rightsquigarrow X$ if
+\begin{equation}
+    \lim_{n\rightarrow\infty} F_{X_{n}}(t) = F_{X}(t)
+\end{equation}
+$\forall t$ on which $F_{X}$ is continuous.\\
+
+\textbf{Thm 7:} Conv. a.s. and in q.m. imply conv. in prob. All three imply conv. in distribution. Conv. in distribution to a point-mass also implies conv. in prob.\\
+%Ex from class: Showed conv. in prob $\not\implies$ conv. a.s.. Showed conv. in prob $\not\implies$ conv. in q.m.. Showed conv. in distro $\not\implies$ conv. in prob.
+
+\textbf{Thm 10a:} $X$,$X_{n}$,$Y$,$Y_{n}$ random variables. Then
+\begin{flalign}
+    (a)& \hspace{2mm} X_{n} \xrightarrow{p} X, Y_{n} \xrightarrow{p} Y \implies X_{n} + Y_{n} \xrightarrow{p} X + Y \\
+    (b)& \hspace{2mm} X_{n} \xrightarrow{p} X, Y_{n} \xrightarrow{p} Y \implies X_{n}Y_{n} \xrightarrow{p} XY \\
+    (c)& \hspace{2mm} X_{n} \xrightarrow{qm} X, Y_{n} \xrightarrow{qm} Y \implies X_{n} + Y_{n} \xrightarrow{qm} X + Y
+\end{flalign}
+
+\textbf{Thm 10b (Slutzky's Thm):} $X$,$X_{n}$,$Y_{n}$ random variables. Then
+\begin{flalign}
+    (a)& \hspace{2mm} X_{n} \rightsquigarrow X, Y_{n} \rightsquigarrow c \implies X_{n} + Y_{n} \rightsquigarrow X + c \\
+    (b)& \hspace{2mm} X_{n} \rightsquigarrow X, Y_{n} \rightsquigarrow c \implies X_{n}Y_{n} \rightsquigarrow cX
+\end{flalign}
+
+\textbf{Thm 12 (Law of Large Numbers):} $X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i})=\mu$ $\implies$ $\overline{X}_{n} \xrightarrow{\text{qm}} \mu$.
+
+\textbf{Thm 14 (CLT):} $X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i})=\mu$ $\text{Var}(X_{i}) = \sigma^{2}$\\
+$\implies$ $\sqrt{n}(\overline{X}_{n}-\mu)/\sigma \rightsquigarrow \mathcal{N}(0,1)$\\
+$\implies$ $\overline{X}_{n} \rightsquigarrow \mathcal{N}(\mu,\sigma^{2}/n)$\\
+$\implies$ $\sqrt{n}(\overline{X}_{n}-\mu)/S_{n}\rightsquigarrow \mathcal{N}(0,1)$
+
+\textbf{Thm 18 (delta method):} If $\sqrt{n}(Y_{n}-\mu)/\sigma \rightsquigarrow \mathcal{N}(0,1)$, $g'(\mu) \neq 0$
+$\implies$ $\sqrt{n}(g(Y_{n})-g(\mu))/|g'(\mu)|\sigma \rightsquigarrow \mathcal{N}(0,1)$\\
+ie $Y_{n} \approx \mathcal{N}(\mu,\sigma^{2}/n)$ $\implies$ $g(Y_{n}) \approx \mathcal{N}(g(\mu),g'(\mu)^{2}\sigma^{2}/n)$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% from test1_cheatsheet
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\subsection*{Distributions}
+Discrete distributions:
+\begin{flalign}
+(a)& \hspace{2mm} \text{Bernoulli} \hspace{2mm} f(x|p) = p^{x}(1-p)^{1-x}, \hspace{3mm} x \in \{0, 1\} \\
+(b)& \hspace{2mm} \text{Binomial} \hspace{2mm} f(x|n,p) = {\binom{n}{x}} p^{x}(1-p)^{n-x}, \hspace{2mm} x \in \{0,1,\ldots,n\} \\
+(c)& \hspace{2mm} \text{Poisson} \hspace{2mm} f(x|\lambda) = \frac{e^{-\lambda}\lambda^{x}}{x!}, \hspace{3mm} x \in \{0, 1, 2, \ldots\}
+\end{flalign}
+
+Continuous distributions:
+\begin{flalign}
+(a)& \hspace{2mm} \text{Uniform} \hspace{2mm} f(x|a,b) = \frac{1}{b-a}, \hspace{3mm} x \in [a,b] \\
+(b)& \hspace{2mm} \text{Normal} \hspace{2mm} f(x|\mu,\sigma^{2}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^{2}/(2\sigma^{2})}, \hspace{2mm} x \in \mathbb{R} \\
+(c)& \hspace{2mm} \text{Gamma} \hspace{2mm} f(x|\alpha,\beta) = \frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}, \hspace{2mm} x \in \mathbb{R}_{+}, \alpha \hspace{1mm}\beta>0
+\end{flalign}
+
+
+\subsection*{Expected Values}
+The \textbf{mean} or \textbf{expected value} of $g(X)$ is
+\begin{equation}
+\mathbb{E}(g(X)) = \int g(x)dF(x) = \int g(x)dP(x)
+\end{equation}
+Related properties and definitions:
+\begin{flalign}
+(a)& \hspace{2mm} \mu = \mathbb{E}(X) \\
+(b)& \hspace{2mm} \mathbb{E}(\sum_{i} c_{i}g_{i}(X_{i})) = \sum_{i} c_{i} \mathbb{E}(g_{i}(X_{i})) \\
+(c)& \hspace{2mm} \mathbb{E}\left(\prod_{i} X_{i} \right) = \prod_{i} \mathbb{E}(X_{i}), \hspace{4mm} X_{1}, \ldots, X_{n} \text{ indep't} \\
+(d)& \hspace{2mm} Var(X) = \sigma^{2} = \mathbb{E}((X-\mu)^{2}) \hspace{4mm} \text{is the \textbf{variance} of X} \\
+(e)& \hspace{2mm} Var(X) = \mathbb{E}(X^{2}) - \mu^{2} \\
+(f)& \hspace{2mm} Var \left (\sum_{i} a_{i}X_{i} \right ) = \sum_{i} a_{i}^{2} Var(X_{i}), \hspace{4mm} X_{1}, \ldots, X_{n} \text{ indep't} \\
+(g)& \hspace{2mm} Cov(X,Y) = \mathbb{E}((X-\mu_{X})(Y-\mu_{Y})) \hspace{2mm} \text{is the \textbf{covariance}} \\
+(h)& \hspace{2mm} Cov(X,Y) = \mathbb{E}(XY) - \mu_{x}\mu_{Y} \\
+(i)& \hspace{2mm} \rho(X,Y) = Cov(X,Y) / \sigma_{x}\sigma_{y}, \hspace{4mm} -1 \leq \rho(X,Y) \leq 1
+\end{flalign}
+The \textbf{conditional expectation} of Y given X is the random variable $g(X) = \mathbb{E}(Y|X)$, where
+\begin{gather}
+\mathbb{E}(Y|X=x) = \int y f(y|x)dy\\
+\text{and} \hspace{2mm} f(y|x) = f_{X,Y}(x,y) / f_{X}(x)
+\end{gather}
+The \emph{Law of Total/Iterated Expectation} is
+\begin{equation}
+\mathbb{E}(Y) = \mathbb{E}[\mathbb{E}(Y|X)]
+\end{equation}
+The \emph{Law of Total Variance} is
+\begin{equation}
+Var(Y) = Var[\mathbb{E}(Y|X)] + \mathbb{E}[Var(Y|X)]
+\end{equation}
+The \emph{Law of Total Covariance} is
+\begin{equation}
+Cov(X,Y) = \mathbb{E}(Cov(X,Y|Z)) + Cov(\mathbb{E}(X|Z), \mathbb{E}(Y|Z))
+\end{equation}
 
 
 \end{document}
