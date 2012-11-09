@@ -8,286 +8,103 @@
 \usepackage{amsmath,amsthm,amssymb,MnSymbol}
 \setlength{\parindent}{0in}
 \renewenvironment{proof}{{\bfseries Proof}}{\\}
+\newcommand{\newlinetab}[0]{$\text{ }\hspace{3mm}$}
 
 %--------------------------------------------------
-% Intermediate Statistics 705 Cheatsheet for Test 3 
+% Intermediate Statistics 705 Cheatsheet for Test 3
 %--------------------------------------------------
 
 \begin{document}
 
 \subsection*{Aymptotic (Large Sample) Theory}
-o and O notation.\\
-Distances between distributions.\\
-Consistency of MLE.\\
-Score and Fisher Information.\\
-Efficiency and Asymptotic Normality.\\
-Relative efficiency.\\
-Robustness.\\
+A random sequence $A_{n}$ is:
+\begin{flalign}
+    &(a) \hspace{2mm} o_{p}(1) \text{ if } A_{n} \xrightarrow{p} 0\\
+    &(b) \hspace{2mm} o_{p}(B_{n}) \text{ if } A_{n}/B_{n} \xrightarrow{p} 0\\
+    &(c) \hspace{2mm} O_{p}(1) \text{ if } \forall \epsilon>0, \exists M :
+        \lim_{n\rightarrow \infty} \mathbb{P}(|A_{n}|>M)<\epsilon \\
+    &(d) \hspace{2mm} O_{p}(B_{n}) \text{ if } A_{n}/B_{n} = O_{p}(1)
+\end{flalign}
+If $Y_{n} \rightsquigarrow Y \implies Y_{n}=O_{p}(1)$\\
+If $\sqrt{n}(Y_{n}-c)\rightsquigarrow Y$ $\implies$ $Y_{n}=O_{p}(1/\sqrt{n})$
+
+\subsubsection*{Distances Between Distributions}
+For distributions $P$ and $Q$ with pdfs $p$ and $q$:
+\begin{flalign}
+    &(a) \hspace{2mm} V(P,Q) = \sup_{A} |P(A)-Q(A)| \hspace{3mm} \text{\textbf{total variation} distance}\\
+    &(b) \hspace{2mm} K(P,Q) = \int p \text{log}(p/q) \hspace{3mm} \text{\textbf{Kullback-Leibler} divergence}\\
+    &(c) \hspace{2mm} d_{2}(P,Q) = \int (p-q)^{2} \hspace{3mm} \mathbf{L_{2}} \text{ distance}
+\end{flalign}
+A model is \textbf{identifiable} if: $\theta_{1} \neq \theta_{2}$ $\implies$ $K(\theta_{1},\theta_{2})>0$.
+
+\subsubsection*{Consistency}
+$\hat{\theta}_{n} = T(X^{n})$ is \textbf{consistent} for $\theta$ if $\hat{\theta}_{n} \xrightarrow{p} \theta$
+    (ie if $\hat{\theta}_{n} - \theta = o_{p}(1)$).\\
+To show consistency, can show: $\text{Bias}^{2}(\hat{\theta}_{n}) + \text{Var}(\hat{\theta}_{n}) \rightarrow 0$.\\
+The MLE is consistent under regularity conditions.\\
+MLE not consistent when number of params (or support?) grows.
+
+\subsubsection*{Score and Fisher Information}
+The \textbf{score function} is $S(\theta) = \frac{\partial}{\partial\theta} l(\theta) = \frac{\partial}{\partial\theta} \sum_{i} \text{log} \hspace{1pt} p(x_{i}|\theta)$.\\
+The \textbf{Fisher information} is defined as
+\begin{equation}
+    I_{n}(\theta) = \mathbb{E}_{\theta} \left[ S(\theta)^{2} \right] = \text{Var}_{\theta} \left[ S(\theta) \right] 
+        = -\mathbb{E}_{\theta} \left[ \frac{\partial^{2}}{\partial\theta^{2}} l(\theta) \right]
+\end{equation}
+and $I_{n}(\theta) = -n\mathbb{E} \left[ \frac{\partial^{2}}{\partial\theta^{2}} \text{log}\hspace{1pt} p(X_{1};\theta) \right] = nI_{1}(\theta)$.\\
+The \textbf{observed information} $\hat{I}_{n}(\theta) = -\sum_{i}\frac{\partial^{2}}{\partial\theta^{2}} \text{log}\hspace{1pt}p(X_{i};\theta)$.\\
+Vector case: $S(\theta) = \left[ \frac{\partial l(\theta)}{\partial \theta_{i}} \right]_{i=1,\ldots,K}$ \hspace{1mm}
+    $I_{ij} = -\mathbb{E}_{\theta}\left[\frac{\partial^{2} l(\theta)}{\partial\theta_{i}\partial\theta_{j}}\right]_{i,j=1,\ldots,K}$
+
+\subsubsection*{Efficiency and Robustness}
+For an estimator $\hat{\theta}_{n}(X^{n})$ of $\theta$, where $X^{n} \stackrel{\text{iid}}{\sim} p(x|\theta)$:\\
+If $\sqrt{n}(\hat{\theta}_{n} - \theta) \rightsquigarrow \mathcal{N}(0,v^{2})$, then $v^2$ is the \textbf{asymptotic-Var($\hat{\theta}_{n}$)}.\\
+    \newlinetab E.g. for $\hat{\theta}_{n} = \overline{X}_{n}$:
+        \hspace{1pt} $v^{2} = \sigma^{2} = \text{Var}(X_{i}) = \lim_{n \rightarrow \infty} n\text{Var}(\overline{X}_{n})$.\\
+    \newlinetab In general, asymptotic-Var($\hat{\theta}_{n}$) $\neq$ $\lim_{n \rightarrow \infty} n\text{Var}(\hat{\theta}_{n})$.\\
+For param $\tau(\theta)$, $v(\theta) = \frac{|\tau'(\theta)|^{2}}{I(\theta)}$ is the \textbf{Cramer-Rao lower bound}.\\
+    \newlinetab since, for most estimators $\hat{\theta}_{n}$, the asymptotic-Var($\hat{\theta}_{n}$) $\geq v(\theta)$.\\
+If $\sqrt{n}(\hat{\theta}_{n}-\tau(\theta)) \rightsquigarrow \mathcal{N}(0,v(\theta))$ (hits C-R bound) $\implies \hat{\theta}_{n}$ \textbf{efficient}.\\
+(usually) $\sqrt{n}(\tau(\hat{\theta}_{\text{mle}}) - \tau(\theta)) \rightsquigarrow \mathcal{N}(0,v(\theta))$ $\implies$ MLE efficient.\\
+The \textbf{standard error} of $\hat{\theta}$ is $se=\sqrt{\frac{1}{nI(\theta)}}=\sqrt{\frac{1}{I_{n}(\theta)}}$.\\
+The \textbf{estimated standard error} of $\hat{\theta}$ is $\hat{se}=\sqrt{\frac{1}{I_{n}(\hat{\theta})}}$.\\
+For $\hat{\tau} = \tau(\hat{\theta})$, $se=\sqrt{\frac{|\tau'(\theta)|}{I_{n}(\theta)}}$,
+    and $\hat{se}=\sqrt{\frac{|\tau'(\hat{\theta})|}{I_{n}(\hat{\theta})}}$.\\
+If $\sqrt{n}(W_{n}-\tau(\theta)) \rightsquigarrow \mathcal{N}(0,\sigma^{2}_{W})$ and
+    $\sqrt{n}(V_{n}-\tau(\theta)) \rightsquigarrow \mathcal{N}(0,\sigma^{2}_{V})$ \\
+    \newlinetab$\implies$ \textbf{asymptotic relative efficiency} $\text{ARE}(V_{n},W_{n}) = \frac{\sigma^{2}_{W}}{\sigma^{2}_{V}}$.\\
+Often there is a tradeoff between efficiency and robustness. (?)
 
 \subsection*{Hypothesis Testing}
-Constructing Tests\\
+\textbf{Null hypothesis} $H_{0}: \theta \in \Theta_{0}$, \textbf{alternative} $H_{1}: \theta \in \Theta_{1}$.\\
+\textbf{Type I error}: If $H_{0}$ true but we reject $H_{0}$.\\
+To construct a test:
+\begin{equation}
+    \begin{split}
+        &1. \text{ Choose a test statistic } W = W(X_{1},\ldots,X_{n})\\
+        &2. \text{ Choose a rejection region } R\\
+        &3. \text{ If } W\in R, \text{ reject } H_{0} \text{ otherwise retain } H_{0}
+    \end{split}
+\end{equation}
+For rejection region $R$, the \textbf{power function} $\beta(\theta) = \mathbb{P}_{\theta}(X^{n} \in R)$.\\
+Want to maximize $\beta(\theta_{1})$ s.t. $\beta(\theta_{0}) \leq \alpha$.\\
+A test is \textbf{level-$\alpha$} if $\sup_{\theta \in \Theta_{0}} \beta(\theta) \leq \alpha$.\\
+A level-$\alpha$ test with power fn $\beta$ is \textbf{uniformly most powerful} if:
+    \newlinetab$\beta(\theta) \geq \beta'(\theta)$ $\forall \theta \in \Theta_{1}$.
+\subsubsection*{Neyman-Pearson Test}
+For simple $H_{0}: \theta=\theta_{0}$ and $H_{1}: \theta=\theta_{1}$, reject $H_{0}$ if $\frac{L(\theta_{1})}{L(\theta_{0})} > k$.
+    \newlinetab where $k$ chosen s.t. $\mathbb{P}(X^{n} \in R) = \alpha$.
+\subsubsection*{Wald Test}
+For $H_{0}: \theta=\theta_{0}$ and $H_{1}: \theta\neq\theta_{0}$, reject $H_{0}$ if $\left| \frac{\hat{\theta}_{n} - \theta_{0}}{se} \right| > z_{\alpha/2}$.\\
+\newlinetab where $z_{\alpha/2}$ is the inverse standard-normal CDF of $1-\frac{\alpha}{2}$. \\%, ie $\Phi^{-1}(1-\alpha/2)$
+\newlinetab and $\hat{\theta}_{n}$ is an unbiased estimator for $\theta$.\\
+\newlinetab and $se = \sqrt{\text{Var}(\hat{\theta}_{n})}$
+
 Evaluating Tests\\
 Neyman-Pearson Test\\
 Wald Test\\
 Likelihood Ratio Test (LRT)\\
 p-values\\
 Permutation Test\\
-
-\subsection*{Probability Inequalities}
-\textbf{Thm 1 (Gaussian Tail Inequality):}
-Let $X \sim \mathcal{N}(0,1)$. Then
-\begin{equation}
-    \mathbb{P}(|X| > \epsilon) \leq \frac{2}{\epsilon}e^{-\epsilon^{2}/2}
-\end{equation}
-Additionally:
-\begin{equation}
-\mathbb{P}(|\overline{X}_{n}| > \epsilon) \leq \frac{1}{\sqrt{n}\epsilon}e^{-n\epsilon^{2}/2}
-\end{equation}
-    
-\textbf{Thm 2 (Markov Inequality):}
-Let X be a non-negative random variable s.t. $\mathbb{E}(X)$ exists. Then $\forall$ $t>0$
-\begin{equation}
-    \mathbb{P}(X>t) \leq \frac{\mathbb{E}(X)}{t}
-\end{equation}
-
-\textbf{Thm 3 (Chebyshev's Inequality):}
-Let $\mu = \mathbb{E}(X)$ and $\sigma^{2} = \text{Var}(X)$. Then
-\begin{gather}
-    \mathbb{P}(|X-\mu| \geq t) \leq \frac{\sigma^{2}}{t^{2}} \\
-    \mathbb{P}(|(X-\mu)/\sigma| \geq t) \leq \frac{1}{t^{2}}
-\end{gather}
-
-\textbf{Lemma 4:}
-Let $\mathbb{E}(X) = 0$ and $a \leq X \leq b$. Then
-\begin{equation}
-    \mathbb{E}(e^{tX}) \leq e^{t^{2}(b-a)^{2}/8}
-\end{equation}
-
-\textbf{Lemma 5:}
-Let $X$ be any random variable. Then
-\begin{equation}
-    \mathbb{P}(X>\epsilon) \leq \inf_{t \geq 0} e^{-t\epsilon} \mathbb{E}(e^{tX})
-    %\mathbb{P}(X>\epsilon) \leq \underset{t \geq 0}{\text{inf}} e^{-t\epsilon} \mathbb{E}(e^{tX})
-\end{equation}
-
-\textbf{Thm 6 (Hoeffding's Inequality):}
-$X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i}) = \mu$, $a \leq X_{i} \leq b$. Then $\forall \epsilon >0$
-\begin{equation}
-    \mathbb{P}(|\overline{X} - \mu| \geq \epsilon) \leq 2e^{-2n\epsilon^{2}/(b-a)^{2}}
-\end{equation}
-
-\textbf{Thm 9 (McDiarmid):} $X_{1},\ldots,X_{n}$ indep't. If\\
-$\sup_{x_{1},\ldots,x_{n},x'_{i}} \left| g(x_{1},\ldots,x_{n}) - g_{i}^{*}(x_{1},\ldots,x_{n}) \right|$ $\leq c_{i}$ $\forall i$, $\implies$
-\begin{equation}
-    \mathbb{P} \left(g(X_{1},\ldots,X_{n})-\mathbb{E}(g(X_{1},\ldots,X_{n})) \geq \epsilon \right) \leq e^{-2\epsilon^{2}/\sum_{i}c_{i}^{2}}
-\end{equation}
-where $g_{i}^{*} = g$ with $x_{i}$ replaced by $x'_{i}$.
-
-\textbf{Thm 12 (Cauchy-Schwartz inequality):}
-
-\textbf{Thm 13 (Jensen's inequality):}
-
-\textbf{Ex 15 (Kullback Leibler distance):}
-
-\textbf{Thm 18:}
-
-\textbf{$O_{p}$ and $o_{p}$:} $X_{n} = o_{p}(1)$ if $\forall$ $\epsilon>0$, $\lim_{n\rightarrow\infty} \mathbb{P}(|X_{n}|>\epsilon) = 0$.\\
-$X_{n} = O_{p}(1)$ if $\forall$ $\epsilon>0$, $\exists$ $C>0$ s.t. $\lim_{n\rightarrow\infty} \mathbb{P}(|X_{n}|>C) \leq \epsilon$. \\
-$X_{n} = o_{p}(a_{n})$ if $X_{n}/a_{n} = o_{p}(1)$ and $X_{n} = O_{p}(a_{n})$ if $X_{n}/a_{n} = O_{p}(1).$
-
-\subsection*{Shattering}
-Note: remember uniform bounds and union bound.\\
-$F$ a finite set, $|F| = n$, and $G \subset F$. $\mathcal{A}$ is a class of sets.\\
-$\mathcal{A}$ \textbf{picks out} $G$ if $\exists A \in \mathcal{A}$ s.t. $A \cap F = G$.\\
-Let $S(\mathcal{A},F)$ $=$ $|\{G \subset F \text{ picked out by } \mathcal{A}\}|$ $\leq 2^{n}$.\\
-$F$ is \textbf{shattered} by $\mathcal{A}$ if $S(\mathcal{A},F) = 2^{n}$ (ie if $\mathcal{A}$ picks out all $G \subset F$).\\
-Let $\mathcal{F}_{n}$ be all finite sets with $n$ elements.\\
-The \textbf{shatter coefficient} $s_{n}(\mathcal{A}) = \sup_{F \in \mathcal{F}_{n}} s(\mathcal{A},F) \leq 2^{n}$.\\
-The \textbf{VC dimension} $d(\mathcal{A}) =$ the largest $n$ s.t. $s_{n}(\mathcal{A}) = 2^{n}$.\\
-\textbf{Thm 5:} $\forall \epsilon>0$, $\mathbb{P}(\sup_{A \in \mathcal{A}} |P_{n}(A) - P(A)| > \epsilon) \leq 8 s_{n}(\mathcal{A})e^{-n\epsilon^{2}/32}$
-
-
-\subsection*{Random Samples}
-For $X_{1},\ldots,X_{n} \sim F$ a \textbf{statistic} is any $T = g(X_{1},\ldots,X_{n})$.\\
-E.g. $\overline{X}_{n}$, $S_{n} = \sum_{i}(X_{i}-\overline{X}_{n})^{2} / (n-1)$, $\left(X_{(1)},\ldots,X_{(n)}\right)$\\
-\textbf{Notes:} $\mathbb{E}(\overline{X}_{n}) = \mathbb{E}(X_{i})$, $\text{Var}(\overline{X}_{n}) = \text{Var}(X_{i})/n$, $\mathbb{E}(S_{n})^{2} = \text{Var}(X_{i})$, $X_{1,\ldots,n}$ $\sim$ $\text{Bern}(p)$ $\implies$ $\sum_{i} X_{i}$ $\sim$ $\text{Bin}(n,p)$, $X_{1,\ldots,n} \sim \text{Exp}(\beta)$ $\implies$ $\sum_{i}X_{i}$ $\sim$ $\Gamma(n,\beta)$, $X_{1,\ldots,n} \sim \mathcal{N}(0,1)$ $\implies$ $\sum_{i}X_{i}^{2} \sim \chi_{n}$. \\
-\textbf{Thm. 1}: $X_{1},\ldots,X_{n} \sim \mathcal{N}(\mu,\sigma^{2})$ $\implies$  $\overline{X}_{n} \sim \mathcal{N}(\mu, \sigma^{2}/n)$.
-
-
-\subsection*{Convergence}
-$X,X_{1},X_{2},\ldots$ random variables.\\
-(1) $X_{n}$ converges \textbf{almost surely} $X_{n} \xrightarrow{a.s.} X$ if $\forall \epsilon>0$
-\begin{equation}
-    \mathbb{P}(\lim_{n\rightarrow\infty} |X_{n}-X| < \epsilon) = 1
-\end{equation}
-(2) $X_{n}$ converges \textbf{in probability} $X_{n} \xrightarrow{p} X$ if $\forall \epsilon>0$
-\begin{equation}
-    \lim_{n\rightarrow\infty} \mathbb{P}(|X_{n}-X| < \epsilon) = 1 
-\end{equation}
-(3) $X_{n}$ converges \textbf{in quadratic mean} $X_{n} \xrightarrow{qm} X$ if
-\begin{equation}
-    \lim_{n\rightarrow\infty} \mathbb{E}[(X_{n}-X)^{2}] = 0
-\end{equation}
-(4) $X_{n}$ converges \textbf{in distribution} $X_{n} \rightsquigarrow X$ if
-\begin{equation}
-    \lim_{n\rightarrow\infty} F_{X_{n}}(t) = F_{X}(t)
-\end{equation}
-$\forall t$ on which $F_{X}$ is continuous.\\
-
-\textbf{Thm 7:} Conv. a.s. and in q.m. imply conv. in prob. All three imply conv. in distribution. Conv. in distribution to a point-mass also implies conv. in prob.\\
-%Ex from class: Showed conv. in prob $\not\implies$ conv. a.s.. Showed conv. in prob $\not\implies$ conv. in q.m.. Showed conv. in distro $\not\implies$ conv. in prob.
-
-\textbf{Thm 10a:} $X$,$X_{n}$,$Y$,$Y_{n}$ random variables. Then
-\begin{flalign}
-    (a)& \hspace{2mm} X_{n} \xrightarrow{p} X, Y_{n} \xrightarrow{p} Y \implies X_{n} + Y_{n} \xrightarrow{p} X + Y \\
-    (b)& \hspace{2mm} X_{n} \xrightarrow{p} X, Y_{n} \xrightarrow{p} Y \implies X_{n}Y_{n} \xrightarrow{p} XY \\
-    (c)& \hspace{2mm} X_{n} \xrightarrow{qm} X, Y_{n} \xrightarrow{qm} Y \implies X_{n} + Y_{n} \xrightarrow{qm} X + Y
-\end{flalign}
-
-\textbf{Thm 10b (Slutzky's Thm):} $X$,$X_{n}$,$Y_{n}$ random variables. Then
-\begin{flalign}
-    (a)& \hspace{2mm} X_{n} \rightsquigarrow X, Y_{n} \rightsquigarrow c \implies X_{n} + Y_{n} \rightsquigarrow X + c \\
-    (b)& \hspace{2mm} X_{n} \rightsquigarrow X, Y_{n} \rightsquigarrow c \implies X_{n}Y_{n} \rightsquigarrow cX
-\end{flalign}
-
-\textbf{Thm 12 (Law of Large Numbers):} $X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i})=\mu$ $\implies$ $\overline{X}_{n} \xrightarrow{\text{qm}} \mu$.
-
-\textbf{Thm 14 (CLT):} $X_{1},\ldots,X_{n}$ iid, $\mathbb{E}(X_{i})=\mu$ $\text{Var}(X_{i}) = \sigma^{2}$\\
-$\implies$ $\sqrt{n}(\overline{X}_{n}-\mu)/\sigma \rightsquigarrow \mathcal{N}(0,1)$\\
-$\implies$ $\overline{X}_{n} \rightsquigarrow \mathcal{N}(\mu,\sigma^{2}/n)$\\
-$\implies$ $\sqrt{n}(\overline{X}_{n}-\mu)/S_{n}\rightsquigarrow \mathcal{N}(0,1)$
-
-\textbf{Thm 18 (delta method):} If $\sqrt{n}(Y_{n}-\mu)/\sigma \rightsquigarrow \mathcal{N}(0,1)$, $g'(\mu) \neq 0$
-$\implies$ $\sqrt{n}(g(Y_{n})-g(\mu))/|g'(\mu)|\sigma \rightsquigarrow \mathcal{N}(0,1)$\\
-ie $Y_{n} \approx \mathcal{N}(\mu,\sigma^{2}/n)$ $\implies$ $g(Y_{n}) \approx \mathcal{N}(g(\mu),g'(\mu)^{2}\sigma^{2}/n)$
-
-\textbf{Thm 18b (2nd order delta method):??} Should I include this?
-
-
-\subsection*{Sufficiency}
-If $X_{1},\ldots,X_{n} \sim p(x;\theta)$, $T$ \textbf{sufficient} for $\theta$ if $p(x^{n}|t;\theta)$ $=$ $p(x^{n}|t)$.
-\textbf{Thm 9 (factorization):} for $X^{n} \sim p(x;\theta)$, $T(X^{n})$ sufficient for $\theta$ if the joint probability can be factorized as.
-\begin{equation}
-    p(x^{n};\theta) = h(x^{n}) \times g(t;\theta)
-\end{equation}
-$T$ is a \textbf{minimal sufficient statistic (MSS)} if $T$ is sufficient and $T = g(U)$ for all other sufficient stats $U$.\\
-\textbf{Thm 15:} $T$ is a MSS if:
-\begin{equation}
-    \frac{p(y^{n};\theta)}{p(x^{n};\theta)} \text{ constant in $\theta$ } \iff T(y^{n}) = T(x^{n})
-\end{equation}
-
-
-\subsection*{Parametric Point Estimation}
-make sure i've defined: $\mathbb{E}_{\theta}(\hat{\theta})$, bias, sampling distro, standard error, $\hat{\theta}_{n}$ consistent.\\
-\textbf{Method of Moments:} Define equations\\
-(a) \hspace{3mm} $(\sum_{i} X_{i})/n = \mathbb{E}_{\hat{\theta}}(X_{i})$\\
-(b) \hspace{3mm} $(\sum_{i} X_{i}^{2})/n = \mathbb{E}_{\hat{\theta}}(X_{i}^{2})$\\
-(c) \hspace{3mm} $\ldots$ \\
-And solve for $\hat{\theta}$.\\
-\textbf{Maximum Likelihood (MLE):} The MLE is
-\begin{equation}
-\hat{\theta} = \text{arg}\max_{\theta} L(\theta) = \text{arg}\max_{\theta} l(\theta)
-\end{equation}
-Often suffices to solve for $\theta$ in $\frac{\partial l(\theta)}{\partial \theta} = 0$.
-The MLE is \textbf{equivariant} $\implies$ if $\eta = g(\theta)$ then $\hat{\eta} = g(\hat{\theta})$. \\
-\textbf{Bayes Estimation:} For prior $\pi(\theta)$, choose 
-\begin{equation}
-    \hat{\theta} = \mathbb{E}(\theta|x^{n}) = \int \theta \pi(\theta|x^{n}) d\pi
-\end{equation}
-\textbf{Mean Squared Error (MSE):} The MSE is
-\begin{equation}
-    \text{MSE} = \mathbb{E}(\hat{\theta} - \theta)^{2} = \int (\hat{\theta}-\theta)^{2} p(x^{n};\theta)dx^{n} = \text{bias}({\hat{\theta}})^{2} + Var(\hat{\theta})
-\end{equation}
-Defs: $\text{\textbf{bias}}(\hat{\theta})$ $=$ $\mathbb{E}(\hat{\theta}) - \theta$. We say $\hat{\theta}$ is \textbf{consistent} if $\hat{\theta} = \hat{\theta}_{n} \xrightarrow{p} \theta$. The \textbf{standard error} of $\hat{\theta}$, $\text{se}(\hat{\theta})$, is the standard deviation of $\hat{\theta}$.\\
-
-
-\subsection*{Risks and Estimators}
-$L(\theta,\hat{\theta})$ is the \textbf{loss} of an estimator $\hat{\theta} = \hat{\theta}(x^{n})$ for $x^{n} \sim p(x^{n};\theta)$.\\
-The \textbf{risk} of this $\hat{\theta}$ is
-\begin{equation}
-    R(\theta,\hat{\theta}) = \mathbb{E}[L(\theta,\hat{\theta})] = \int L(\theta,\hat{\theta}) p(x^{n};\theta) dx^{n}
-\end{equation}
-When $L(\theta,\hat{\theta}) = (\theta-\hat{\theta})^{2}$, the risk is the MSE.\\
-The \textbf{max risk} of $\hat{\theta}$ over a set $\theta \in \Theta$ is
-\begin{equation}
-    \overline{R}(\hat{\theta}) = \sup_{\theta \in \Theta} R(\theta,\hat{\theta})
-\end{equation}
-%The \textbf{minimax risk} is
-%\begin{equation}
-    %R_{n} = \inf_{\hat{\theta}} \sup_{\theta \in \Theta} R(\theta,\hat{\theta})
-%\end{equation}
-The \textbf{minimax estimator} is
-\begin{equation}
-    \hat{\theta} = \text{arg}\inf_{\hat{\theta}} \overline{R}(\hat{\theta})
-\end{equation}
-The \textbf{Bayes risk} of $\hat{\theta}$ given a prior $\pi(\theta)$ is
-\begin{equation}
-    B_{\pi}(\hat{\theta}) = \int R(\theta,\hat{\theta}) \pi(\theta) d\theta
-\end{equation}
-The \textbf{posterior risk} of $\hat{\theta}$ given a prior $\pi(\theta)$ is
-\begin{equation}
-    r(\hat{\theta}|x^{n}) = \int L(\theta,\hat{\theta}) \pi(\theta|x^{n}) d\theta    
-\end{equation}
-where $\pi(\theta|x^{n}) = \frac{\mathbb{P}(x^{n};\theta)\pi(\theta)}{m(x^{n})}$ is the posterior over $\theta$.\\
-The \textbf{Bayes estimator} is
-\begin{equation}
-    \hat{\theta} = \text{arg}\inf_{\hat{\theta}} B_{\pi}(\hat{\theta}) = \text{arg}\inf_{\hat{\theta}} r(\hat{\theta}|x^{n})
-\end{equation}
-which equals the posterior mean $\mathbb{E}(\theta|x^{n})$ when $L(\theta,\hat{\theta}) = (\theta-\hat{\theta})^{2}$, the posterior median when $L(\theta,\hat{\theta}) = |\theta-\hat{\theta}|$, and the posterior mode when $L(\theta,\hat{\theta}) = \mathbb{I}[\theta \neq \hat{\theta}]$.\\
-\textbf{Thm 10:} If $\hat{\theta}$ is a Bayes estimator for some prior $\pi$ and $R(\theta,\hat{\theta})$ is constant, then $\hat{\theta}$ is a minimax estimator.\\
-\textbf{Note:} The MLE is approximately minimax (as n increases, if dimension of the parameter is fixed).
-
-
-\subsection*{Distributions}
-Discrete distributions:
-\begin{flalign}
-(a)& \hspace{2mm} \text{Bernoulli} \hspace{2mm} f(x|p) = p^{x}(1-p)^{1-x}, \hspace{3mm} x \in \{0, 1\} \\
-(b)& \hspace{2mm} \text{Binomial} \hspace{2mm} f(x|n,p) = {\binom{n}{x}} p^{x}(1-p)^{n-x}, \hspace{2mm} x \in \{0,1,\ldots,n\} \\
-(c)& \hspace{2mm} \text{Poisson} \hspace{2mm} f(x|\lambda) = \frac{e^{-\lambda}\lambda^{x}}{x!}, \hspace{3mm} x \in \{0, 1, 2, \ldots\}
-\end{flalign}
-
-Continuous distributions:
-\begin{flalign}
-(a)& \hspace{2mm} \text{Uniform} \hspace{2mm} f(x|a,b) = \frac{1}{b-a}, \hspace{3mm} x \in [a,b] \\
-(b)& \hspace{2mm} \text{Normal} \hspace{2mm} f(x|\mu,\sigma^{2}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^{2}/(2\sigma^{2})}, \hspace{2mm} x \in \mathbb{R} \\
-(c)& \hspace{2mm} \text{Gamma} \hspace{2mm} f(x|\alpha,\beta) = \frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}, \hspace{2mm} x \in \mathbb{R}_{+}, \alpha \hspace{1mm}\beta>0
-\end{flalign}
-
-
-\subsection*{Expected Values}
-The \textbf{mean} or \textbf{expected value} of $g(X)$ is
-\begin{equation}
-\mathbb{E}(g(X)) = \int g(x)dF(x) = \int g(x)dP(x)
-\end{equation}
-Related properties and definitions:
-\begin{flalign}
-(a)& \hspace{2mm} \mu = \mathbb{E}(X) \\
-(b)& \hspace{2mm} \mathbb{E}(\sum_{i} c_{i}g_{i}(X_{i})) = \sum_{i} c_{i} \mathbb{E}(g_{i}(X_{i})) \\
-(c)& \hspace{2mm} \mathbb{E}\left(\prod_{i} X_{i} \right) = \prod_{i} \mathbb{E}(X_{i}), \hspace{4mm} X_{1}, \ldots, X_{n} \text{ indep't} \\
-(d)& \hspace{2mm} Var(X) = \sigma^{2} = \mathbb{E}((X-\mu)^{2}) \hspace{4mm} \text{is the \textbf{variance} of X} \\
-(e)& \hspace{2mm} Var(X) = \mathbb{E}(X^{2}) - \mu^{2} \\
-(f)& \hspace{2mm} Var \left (\sum_{i} a_{i}X_{i} \right ) = \sum_{i} a_{i}^{2} Var(X_{i}), \hspace{4mm} X_{1}, \ldots, X_{n} \text{ indep't} \\
-(g)& \hspace{2mm} Cov(X,Y) = \mathbb{E}((X-\mu_{X})(Y-\mu_{Y})) \hspace{2mm} \text{is the \textbf{covariance}} \\
-(h)& \hspace{2mm} Cov(X,Y) = \mathbb{E}(XY) - \mu_{x}\mu_{Y} \\
-(i)& \hspace{2mm} \rho(X,Y) = Cov(X,Y) / \sigma_{x}\sigma_{y}, \hspace{4mm} -1 \leq \rho(X,Y) \leq 1
-\end{flalign}
-The \textbf{conditional expectation} of Y given X is the random variable $g(X) = \mathbb{E}(Y|X)$, where
-\begin{gather}
-\mathbb{E}(Y|X=x) = \int y f(y|x)dy\\
-\text{and} \hspace{2mm} f(y|x) = f_{X,Y}(x,y) / f_{X}(x)
-\end{gather}
-The \emph{Law of Total/Iterated Expectation} is
-\begin{equation}
-\mathbb{E}(Y) = \mathbb{E}[\mathbb{E}(Y|X)]
-\end{equation}
-The \emph{Law of Total Variance} is
-\begin{equation}
-Var(Y) = Var[\mathbb{E}(Y|X)] + \mathbb{E}[Var(Y|X)]
-\end{equation}
-The \emph{Law of Total Covariance} is
-\begin{equation}
-Cov(X,Y) = \mathbb{E}(Cov(X,Y|Z)) + Cov(\mathbb{E}(X|Z), \mathbb{E}(Y|Z))
-\end{equation}
-
 
 \end{document}

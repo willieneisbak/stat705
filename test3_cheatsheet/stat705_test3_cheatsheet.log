@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  7 NOV 2012 22:35
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  8 NOV 2012 19:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -610,25 +610,25 @@ LaTeX Font Info:    Redeclaring math accent \vec on input line 1848.
 (./stat705_test3_cheatsheet.aux)
 \openout1 = `stat705_test3_cheatsheet.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 17.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    ... okay on input line 17.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -664,77 +664,54 @@ LaTeX Font Info:    ... okay on input line 16.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 19--26
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 28--35
-
- []
-
-LaTeX Font Info:    Try loading font information for U+msa on input line 38.
+LaTeX Font Info:    Try loading font information for U+msa on input line 20.
 (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 38.
+LaTeX Font Info:    Try loading font information for U+msb on input line 20.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 134--136
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 137--139
+Underfull \hbox (badness 10000) in paragraph at lines 103--109
 
  []
 
 [1
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 200--202
-
- []
-
-[2] [3
-
-] (./stat705_test3_cheatsheet.aux) ) 
+(./stat705_test3_cheatsheet.aux) ) 
 Here is how much of TeX's memory you used:
- 3894 strings out of 493488
- 49831 string characters out of 3141326
- 106818 words of memory out of 3000000
- 7167 multiletter control sequences out of 15000+200000
- 12847 words of font info for 47 fonts, out of 3000000 for 9000
+ 3896 strings out of 493488
+ 49876 string characters out of 3141326
+ 103832 words of memory out of 3000000
+ 7170 multiletter control sequences out of 15000+200000
+ 12501 words of font info for 46 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,13n,32p,489b,153s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2012/texmf-dist/fonts/e
-nc/dvips/mnsymbol/MnSymbolF.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/d
-vips/mnsymbol/MnSymbolS.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips
-/mnsymbol/MnSymbolA.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/mns
-ymbol/MnSymbolC.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/mnsymbo
-l/MnSymbolD.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/mnsymbol/Mn
-SymbolE.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/public/mnsymbol/MnS
-ymbol10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/mnsymbol/MnS
-ymbol5.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/mnsymbol/MnSy
-mbol7.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-bx10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
-x12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5
-.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.p
-fb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></
-usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr
-/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/
-local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></
-usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb
->
-Output written on stat705_test3_cheatsheet.pdf (3 pages, 194699 bytes).
+ 27i,17n,32p,247b,179s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2012/texmf-dist/fonts/enc
+/dvips/mnsymbol/MnSymbolC.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvi
+ps/mnsymbol/MnSymbolS.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/m
+nsymbol/MnSymbolD.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/mnsym
+bol/MnSymbolE.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/mnsymbol/
+MnSymbolF.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/mnsymbol/MnSy
+mbolA.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/public/mnsymbol/MnSym
+bol10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/mnsymbol/MnSym
+bol5.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/mnsymbol/MnSymb
+ol7.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx
+10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
+2.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.
+pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
+fb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
+></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
+/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/
+local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loc
+al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on stat705_test3_cheatsheet.pdf (1 page, 164546 bytes).
 PDF statistics:
- 96 PDF objects out of 1000 (max. 8388607)
- 76 compressed objects within 1 object stream
+ 82 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
