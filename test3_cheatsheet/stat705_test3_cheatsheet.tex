@@ -52,10 +52,10 @@ The \textbf{Fisher information} is defined as
         = -\mathbb{E}_{\theta} \left[ \frac{\partial^{2}}{\partial\theta^{2}} l(\theta) \right]
         %= -\mathbb{E}_{\theta} \left[ \frac{\partial}{\partial\theta} S(\theta) \right]
 \end{equation}
-and $I_{n}(\theta) = -n\mathbb{E} \left[ \frac{\partial^{2}}{\partial\theta^{2}} \text{log}\hspace{1pt} p(X_{1};\theta) \right] = nI_{1}(\theta)$.\\
+    \newlinetab and $I_{n}(\theta) = -n\mathbb{E} \left[ \frac{\partial^{2}}{\partial\theta^{2}} \text{log}\hspace{1pt} p(X_{1};\theta) \right] = nI_{1}(\theta)$.\\
 The \textbf{observed information} $\hat{I}_{n}(\theta) = -\sum_{i}\frac{\partial^{2}}{\partial\theta^{2}} \text{log}\hspace{1pt}p(X_{i};\theta)$.\\
-Vector case: $S(\theta) = \left[ \frac{\partial l(\theta)}{\partial \theta_{i}} \right]_{i=1,\ldots,K}$ \hspace{1mm}
-    $I_{ij} = -\mathbb{E}_{\theta}\left[\frac{\partial^{2} l(\theta)}{\partial\theta_{i}\partial\theta_{j}}\right]_{i,j=1,\ldots,K}$
+    \newlinetab Vector case: $S(\theta) = \left[ \frac{\partial l(\theta)}{\partial \theta_{i}} \right]_{i=1,\ldots,K}$ \hspace{1mm}
+        $I_{ij} = -\mathbb{E}_{\theta}\left[\frac{\partial^{2} l(\theta)}{\partial\theta_{i}\partial\theta_{j}}\right]_{i,j=1,\ldots,K}$
 
 \subsubsection*{Efficiency and Robustness}
 For an estimator $\hat{\theta}_{n}(X^{n})$ of $\theta$, where $X^{n} \stackrel{\text{iid}}{\sim} p(x|\theta)$:\\
@@ -65,9 +65,9 @@ If $\sqrt{n}(\hat{\theta}_{n} - \theta) \rightsquigarrow \mathcal{N}(0,v^{2})$, 
     \newlinetab In general, asymptotic-Var($\hat{\theta}_{n}$) $v^{2}$ $\neq$ $\lim_{n \rightarrow \infty} n\text{Var}(\hat{\theta}_{n})$.\\
     \newlinetab We will use approx: $\text{Var}(\hat{\theta}_{n}) \approx v^{2}/n$.\\
 For param $\tau(\theta)$, $v(\theta) = \frac{|\tau'(\theta)|^{2}}{I_{1}(\theta)}$ is the \textbf{Cramer-Rao lower bound}.\\
-    \newlinetab since, for most estimators $\hat{\theta}_{n}$, the asymptotic-Var($\hat{\theta}_{n}$) $\geq v(\theta)$.\\
+    \newlinetab for most estimators $v^{2} \geq v(\theta)$.\\
 If $\sqrt{n}(\hat{\theta}_{n}-\tau(\theta)) \rightsquigarrow \mathcal{N}(0,v(\theta))$ (ie if $v^{2} = v(\theta)$) $\implies \hat{\theta}_{n}$ \textbf{efficient}.\\
-    \newlinetab (usually) $\sqrt{n}(\tau(\hat{\theta}_{\text{mle}}) - \tau(\theta)) \rightsquigarrow \mathcal{N}(0,v(\theta))$ $\implies$ MLE efficient.\\
+    \newlinetab usually, $\sqrt{n}(\tau(\hat{\theta}_{\text{mle}}) - \tau(\theta)) \rightsquigarrow \mathcal{N}(0,v(\theta))$ $\implies$ MLE efficient.\\
 The \textbf{standard error} of \textbf{efficient} $\hat{\theta}_{n}$ is $se = \sqrt{\text{Var}(\hat{\theta}_{n})} \approx \sqrt{\frac{1}{I_{n}(\theta)}}$.\\
 The \textbf{estimated standard error} of \textbf{efficient} $\hat{\theta}_{n}$ is $\hat{se} \approx \sqrt{\frac{1}{I_{n}(\hat{\theta}_{n})}}$.\\
     \newlinetab For efficient $\hat{\theta}_{n}$, $\hat{\tau} = \tau(\hat{\theta}_{n})$, $se \approx \sqrt{\frac{|\tau'(\theta)|^{2}}{I_{n}(\theta)}}$,
@@ -93,7 +93,7 @@ To construct a test:
     \end{split}
 \end{equation}
 For rejection region $R$, the \textbf{power function} $\beta(\theta) = \mathbb{P}_{\theta}(X^{n} \in R)$.\\
-Want \textbf{level-$\mathbf{\alpha}$} test ($\sup_{\theta \in \Theta_{0}} \beta(\theta) \leq \alpha$) that maximizes $\beta(\theta_{1})$.\\
+Want \textbf{level-$\mathbf{\alpha}$} test ($\sup_{\theta \in \Theta_{0}} \beta(\theta) \leq \alpha$) that maximizes $\beta(\theta\in\Theta_{1})$.\\
 A level-$\alpha$ test with power fn $\beta$ is \textbf{uniformly most powerful} if:
     \newlinetab$\beta(\theta) \geq \beta'(\theta)$ $\forall \theta \in \Theta_{1}$ $\forall \beta'\neq\beta$.
 \subsubsection*{Neyman-Pearson Test}
@@ -111,9 +111,9 @@ For $H_{0}: \theta\in\Theta_{0}$ and $H_{1}: \theta\notin\Theta_{0}$, reject $H_
     \newlinetab where $L(\hat{\theta}_{0}) = \sup_{\theta\in\Theta_{0}}L(\theta)$ and $L(\hat{\theta}) = \sup_{\theta\in\Theta}L(\theta)$.\\
     \newlinetab and $c$ chosen s.t. $\mathbb{P}(\lambda(x^{n}) \leq c) = \alpha$.\\
     \newlinetab \textbf{Thm:} under $H_{0} : \theta=\theta_{0}$ $\implies$ $W_{n} = -2\text{log}\lambda(X^{n}) \rightsquigarrow \chi_{1}^{2}$\\
-        \newlinetab\newlinetab $\implies \lim_{n\rightarrow\infty} \mathbb{P}_{\theta_{0}}(W_{n} > \chi_{1,\alpha}^{2}) = \alpha$.\\
-    \newlinetab\newlinetab Also: for $\theta=(\theta_{1},\ldots,\theta_{k})$, if $H_{0}$ fixes some of the parameters\\
-    \newlinetab\newlinetab $\implies$ $-2\text{log}\lambda(X^{n}) \rightsquigarrow \chi_{\nu}^{2}$, where $\nu = \text{dim}(\Theta) - \text{dim}(\Theta_{0})$.
+    \newlinetab\newlinetab $\implies$ reject $H_{0}$ if $W_{n}>\chi_{1,\alpha}^{2}$.\\ %\lim_{n\rightarrow\infty} \mathbb{P}_{\theta_{0}}(W_{n} > \chi_{1,\alpha}^{2}) = \alpha$.\\
+        \newlinetab\newlinetab Also: for $\theta=(\theta_{1},\ldots,\theta_{k})$, if $H_{0}$ fixes some of the parameters\\
+        \newlinetab\newlinetab $\implies$ $-2\text{log}\lambda(X^{n}) \rightsquigarrow \chi_{\nu}^{2}$, where $\nu = \text{dim}(\Theta) - \text{dim}(\Theta_{0})$.
 
 \subsubsection*{P-Values}
 The \textbf{p-value} $p(x^{n})$ is the smallest $\alpha$-level s.t. we reject $H_{0}$.\\
@@ -123,5 +123,25 @@ The \textbf{p-value} $p(x^{n})$ is the smallest $\alpha$-level s.t. we reject $H
 \textbf{Thm:} Under $H_{0}:\theta=\theta_{0}$,\hspace{2mm}$p(x^{n}) \sim \text{Unif}(0,1)$.
 
 \subsubsection*{Permutation Test}
+$X^{n} \sim F$, $Y^{m} \sim G$, $H_{0}:F=G$, $H_{1}:F \neq G$\\
+Let $Z=(X^{n},Y^{m})$ and $L=(1,\ldots,1,2,\ldots,2)$.
+
+\subsection*{Confidence Intervals}
+We want a $1-\alpha$ \textbf{confidence interval} $C_{n} = [L(X^{n}),U(X^{n})]$ s.t.\\
+    \newlinetab$\mathbb{P}_{\theta} \left( L(X^{n}) \leq \theta \leq U(X^{n}) \right)$ $\geq$ $1-\alpha$, \hspace{1mm} $\forall \theta\in\Theta$.\\
+Generally, a $1-\alpha$ \textbf{confidence set} $C_{n}$ is a random set $C_{n} \subset \Theta$ s.t.\\
+    \newlinetab $\inf_{\theta\in\Theta}\mathbb{P}_{\theta}\left( \theta \in C_{n}(X^{n}) \right) \geq 1-\alpha$.\\
+
+\subsubsection*{Using Probability Inequalities}
+Prob inequalities give (for eg.) $\mathbb{P}(|\hat{\theta}_{n} - \theta| > \epsilon) \leq g(\exp^{-f(\epsilon)}) \underset{\text{set to}}{=} \alpha$.
+    $\text{ }\hspace{1pt}$ solving for $\epsilon$: $\mathbb{P} \left( |\hat{\theta}_{n} - \theta| > \tilde{f}(\alpha) \right) \leq \alpha \Rightarrow C_{n}$
+        $=$ $\left( \hat{\theta}-\tilde{f}(\alpha), \hat{\theta}+\tilde{f}(\alpha) \right)$.\\
+
+\subsubsection*{Inverting a Test}
+In level-$\alpha$ tests $\mathbb{P}_{\theta_{0}}(T(x^{n}) \in R) = \alpha$ $\Rightarrow$ let $C_{n} = \{ \theta : T(x^{n}) \in A(\theta) \}$.
+    $\text{ }\hspace{1mm}$where $A(\theta) = \{ T(x^{n}) \notin R \text{ s.t. } \theta = \theta_{0} \}$ (accept region if $\theta$ is null).\\
+
+\subsubsection*{Pivots}
+
 
 \end{document}
