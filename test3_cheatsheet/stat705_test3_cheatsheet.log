@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  9 NOV 2012 12:02
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  9 NOV 2012 14:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -725,7 +725,7 @@ usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr
 local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></
 usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb
 >
-Output written on stat705_test3_cheatsheet.pdf (2 pages, 209298 bytes).
+Output written on stat705_test3_cheatsheet.pdf (2 pages, 209306 bytes).
 PDF statistics:
  93 PDF objects out of 1000 (max. 8388607)
  73 compressed objects within 1 object stream
