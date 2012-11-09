@@ -45,11 +45,12 @@ The MLE is consistent under regularity conditions.\\
 MLE not consistent when number of params (or support?) grows.
 
 \subsubsection*{Score and Fisher Information}
-The \textbf{score function} is $S(\theta) = \frac{\partial}{\partial\theta} l(\theta) = \frac{\partial}{\partial\theta} \sum_{i} \text{log} \hspace{1pt} p(x_{i}|\theta)$.\\
+The \textbf{score function} is $S(\theta) = \frac{\partial}{\partial\theta} l(\theta) = \frac{\partial}{\partial\theta} \sum_{i=1}^{n} \text{log} \hspace{1pt} p(x_{i}|\theta)$.\\
 The \textbf{Fisher information} is defined as
 \begin{equation}
     I_{n}(\theta) = \mathbb{E}_{\theta} \left[ S(\theta)^{2} \right] = \text{Var}_{\theta} \left[ S(\theta) \right] 
         = -\mathbb{E}_{\theta} \left[ \frac{\partial^{2}}{\partial\theta^{2}} l(\theta) \right]
+        %= -\mathbb{E}_{\theta} \left[ \frac{\partial}{\partial\theta} S(\theta) \right]
 \end{equation}
 and $I_{n}(\theta) = -n\mathbb{E} \left[ \frac{\partial^{2}}{\partial\theta^{2}} \text{log}\hspace{1pt} p(X_{1};\theta) \right] = nI_{1}(\theta)$.\\
 The \textbf{observed information} $\hat{I}_{n}(\theta) = -\sum_{i}\frac{\partial^{2}}{\partial\theta^{2}} \text{log}\hspace{1pt}p(X_{i};\theta)$.\\
@@ -61,18 +62,22 @@ For an estimator $\hat{\theta}_{n}(X^{n})$ of $\theta$, where $X^{n} \stackrel{\
 If $\sqrt{n}(\hat{\theta}_{n} - \theta) \rightsquigarrow \mathcal{N}(0,v^{2})$, then $v^2$ is the \textbf{asymptotic-Var($\hat{\theta}_{n}$)}.\\
     \newlinetab E.g. for $\hat{\theta}_{n} = \overline{X}_{n}$:
         \hspace{1pt} $v^{2} = \sigma^{2} = \text{Var}(X_{i}) = \lim_{n \rightarrow \infty} n\text{Var}(\overline{X}_{n})$.\\
-    \newlinetab In general, asymptotic-Var($\hat{\theta}_{n}$) $\neq$ $\lim_{n \rightarrow \infty} n\text{Var}(\hat{\theta}_{n})$.\\
-For param $\tau(\theta)$, $v(\theta) = \frac{|\tau'(\theta)|^{2}}{I(\theta)}$ is the \textbf{Cramer-Rao lower bound}.\\
+    \newlinetab In general, asymptotic-Var($\hat{\theta}_{n}$) $v^{2}$ $\neq$ $\lim_{n \rightarrow \infty} n\text{Var}(\hat{\theta}_{n})$.\\
+    \newlinetab We will use approx: $\text{Var}(\hat{\theta}_{n}) \approx v^{2}/n$.\\
+For param $\tau(\theta)$, $v(\theta) = \frac{|\tau'(\theta)|^{2}}{I_{1}(\theta)}$ is the \textbf{Cramer-Rao lower bound}.\\
     \newlinetab since, for most estimators $\hat{\theta}_{n}$, the asymptotic-Var($\hat{\theta}_{n}$) $\geq v(\theta)$.\\
-If $\sqrt{n}(\hat{\theta}_{n}-\tau(\theta)) \rightsquigarrow \mathcal{N}(0,v(\theta))$ (hits C-R bound) $\implies \hat{\theta}_{n}$ \textbf{efficient}.\\
-(usually) $\sqrt{n}(\tau(\hat{\theta}_{\text{mle}}) - \tau(\theta)) \rightsquigarrow \mathcal{N}(0,v(\theta))$ $\implies$ MLE efficient.\\
-The \textbf{standard error} of $\hat{\theta}$ is $se=\sqrt{\frac{1}{nI(\theta)}}=\sqrt{\frac{1}{I_{n}(\theta)}}$.\\
-The \textbf{estimated standard error} of $\hat{\theta}$ is $\hat{se}=\sqrt{\frac{1}{I_{n}(\hat{\theta})}}$.\\
-For $\hat{\tau} = \tau(\hat{\theta})$, $se=\sqrt{\frac{|\tau'(\theta)|}{I_{n}(\theta)}}$,
-    and $\hat{se}=\sqrt{\frac{|\tau'(\hat{\theta})|}{I_{n}(\hat{\theta})}}$.\\
+If $\sqrt{n}(\hat{\theta}_{n}-\tau(\theta)) \rightsquigarrow \mathcal{N}(0,v(\theta))$ (ie if $v^{2} = v(\theta)$) $\implies \hat{\theta}_{n}$ \textbf{efficient}.\\
+    \newlinetab (usually) $\sqrt{n}(\tau(\hat{\theta}_{\text{mle}}) - \tau(\theta)) \rightsquigarrow \mathcal{N}(0,v(\theta))$ $\implies$ MLE efficient.\\
+The \textbf{standard error} of \textbf{efficient} $\hat{\theta}_{n}$ is $se = \sqrt{\text{Var}(\hat{\theta}_{n})} \approx \sqrt{\frac{1}{I_{n}(\theta)}}$.\\
+The \textbf{estimated standard error} of \textbf{efficient} $\hat{\theta}_{n}$ is $\hat{se} \approx \sqrt{\frac{1}{I_{n}(\hat{\theta}_{n})}}$.\\
+    \newlinetab For efficient $\hat{\theta}_{n}$, $\hat{\tau} = \tau(\hat{\theta}_{n})$, $se \approx \sqrt{\frac{|\tau'(\theta)|^{2}}{I_{n}(\theta)}}$,
+        and $\hat{se} \approx \sqrt{\frac{|\tau'(\hat{\theta}_{n})|^{2}}{I_{n}(\hat{\theta}_{n})}}$.\\
+In general, \textbf{asymptotic normality} is when:\\
+    \newlinetab $\frac{\hat{\theta}_{n} - \mathbb{E}(\hat{\theta}_{n})}{\sqrt{\text{Var}(\hat{\theta}_{n})}} \rightsquigarrow \mathcal{N}(0,1)$
+        $\implies$ $\hat{\theta}_{n} \rightsquigarrow \mathcal{N}(\mathbb{E}(\hat{\theta}_{n}), \text{Var}(\hat{\theta}_{n}))$. \\
 If $\sqrt{n}(W_{n}-\tau(\theta)) \rightsquigarrow \mathcal{N}(0,\sigma^{2}_{W})$ and
     $\sqrt{n}(V_{n}-\tau(\theta)) \rightsquigarrow \mathcal{N}(0,\sigma^{2}_{V})$ \\
-    \newlinetab$\implies$ \textbf{asymptotic relative efficiency} $\text{ARE}(V_{n},W_{n}) = \frac{\sigma^{2}_{W}}{\sigma^{2}_{V}}$.\\
+    $\text{ }\hspace{2mm}$$\implies$ \textbf{asymptotic relative efficiency} $\text{ARE}(V_{n},W_{n}) = \sigma^{2}_{W} / \sigma^{2}_{V}$.\\
 Often there is a tradeoff between efficiency and robustness. (?)
 
 \subsection*{Hypothesis Testing}
@@ -93,12 +98,18 @@ A level-$\alpha$ test with power fn $\beta$ is \textbf{uniformly most powerful} 
     \newlinetab$\beta(\theta) \geq \beta'(\theta)$ $\forall \theta \in \Theta_{1}$.
 \subsubsection*{Neyman-Pearson Test}
 For simple $H_{0}: \theta=\theta_{0}$ and $H_{1}: \theta=\theta_{1}$, reject $H_{0}$ if $\frac{L(\theta_{1})}{L(\theta_{0})} > k$.
-    \newlinetab where $k$ chosen s.t. $\mathbb{P}(X^{n} \in R) = \alpha$.
+    \newlinetab where $k$ chosen s.t. $\mathbb{P}(\frac{L(\theta_{1})}{L(\theta_{0})} > k) = \alpha$.
 \subsubsection*{Wald Test}
 For $H_{0}: \theta=\theta_{0}$ and $H_{1}: \theta\neq\theta_{0}$, reject $H_{0}$ if $\left| \frac{\hat{\theta}_{n} - \theta_{0}}{se} \right| > z_{\alpha/2}$.\\
-\newlinetab where $z_{\alpha/2}$ is the inverse standard-normal CDF of $1-\frac{\alpha}{2}$. \\%, ie $\Phi^{-1}(1-\alpha/2)$
-\newlinetab and $\hat{\theta}_{n}$ is an unbiased estimator for $\theta$.\\
-\newlinetab and $se = \sqrt{\text{Var}(\hat{\theta}_{n})}$
+    \newlinetab where $z_{\alpha/2}$ is the inverse standard-normal CDF of $1-\frac{\alpha}{2}$. \\%, ie $\Phi^{-1}(1-\alpha/2)$
+    \newlinetab and $\hat{\theta}_{n}$ is an unbiased estimator for $\theta$.\\
+    \newlinetab and $se = \sqrt{\text{Var}(\hat{\theta}_{n})}$. Can also use $\hat{se}$.\\
+    \newlinetab and if $\hat{\theta}_{n}$ efficient, can approx: $se \approx \sqrt{\frac{1}{I_{n}(\theta)}}$ or $\hat{se} \approx \sqrt{\frac{1}{I_{n}(\hat{\theta}_{n})}}$.
+
+\subsubsection*{Likelihood Ratio Test}
+For $H_{0}: \theta=\theta_{0}$ and $H_{1}: \theta\neq\theta_{0}$, reject $H_{0}$ if $\lambda(x^{n}) = \frac{L(\hat{\theta}_{0})}{L(\hat{\theta})} \leq c$.
+    \newlinetab where $L(\hat{\theta}_{0}) = \sup_{\theta\in\Theta_{0}}L(\theta)$ and $L(\hat{\theta}) = \sup_{\theta\in\Theta}L(\theta)$.\\
+    \newlinetab and $c$ chosen s.t. $\mathbb{P}(\lambda(x^{n}) \leq c) = \alpha$.\\
 
 Evaluating Tests\\
 Neyman-Pearson Test\\
