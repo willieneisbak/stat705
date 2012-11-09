@@ -80,6 +80,7 @@ If $\sqrt{n}(W_{n}-\tau(\theta)) \rightsquigarrow \mathcal{N}(0,\sigma^{2}_{W})$
     $\text{ }\hspace{2mm}$$\implies$ \textbf{asymptotic relative efficiency} $\text{ARE}(V_{n},W_{n}) = \sigma^{2}_{W} / \sigma^{2}_{V}$.\\
 Often there is a tradeoff between efficiency and robustness. (?)
 
+\newpage
 \subsection*{Hypothesis Testing}
 \textbf{Null hypothesis} $H_{0}: \theta \in \Theta_{0}$, \textbf{alternative} $H_{1}: \theta \in \Theta_{1}$.\\
 \textbf{Type I error}: If $H_{0}$ true but we reject $H_{0}$.\\
@@ -92,10 +93,9 @@ To construct a test:
     \end{split}
 \end{equation}
 For rejection region $R$, the \textbf{power function} $\beta(\theta) = \mathbb{P}_{\theta}(X^{n} \in R)$.\\
-Want to maximize $\beta(\theta_{1})$ s.t. $\beta(\theta_{0}) \leq \alpha$.\\
-A test is \textbf{level-$\alpha$} if $\sup_{\theta \in \Theta_{0}} \beta(\theta) \leq \alpha$.\\
+Want \textbf{level-$\mathbf{\alpha}$} test ($\sup_{\theta \in \Theta_{0}} \beta(\theta) \leq \alpha$) that maximizes $\beta(\theta_{1})$.\\
 A level-$\alpha$ test with power fn $\beta$ is \textbf{uniformly most powerful} if:
-    \newlinetab$\beta(\theta) \geq \beta'(\theta)$ $\forall \theta \in \Theta_{1}$.
+    \newlinetab$\beta(\theta) \geq \beta'(\theta)$ $\forall \theta \in \Theta_{1}$ $\forall \beta'\neq\beta$.
 \subsubsection*{Neyman-Pearson Test}
 For simple $H_{0}: \theta=\theta_{0}$ and $H_{1}: \theta=\theta_{1}$, reject $H_{0}$ if $\frac{L(\theta_{1})}{L(\theta_{0})} > k$.
     \newlinetab where $k$ chosen s.t. $\mathbb{P}(\frac{L(\theta_{1})}{L(\theta_{0})} > k) = \alpha$.
@@ -103,19 +103,25 @@ For simple $H_{0}: \theta=\theta_{0}$ and $H_{1}: \theta=\theta_{1}$, reject $H_
 For $H_{0}: \theta=\theta_{0}$ and $H_{1}: \theta\neq\theta_{0}$, reject $H_{0}$ if $\left| \frac{\hat{\theta}_{n} - \theta_{0}}{se} \right| > z_{\alpha/2}$.\\
     \newlinetab where $z_{\alpha/2}$ is the inverse standard-normal CDF of $1-\frac{\alpha}{2}$. \\%, ie $\Phi^{-1}(1-\alpha/2)$
     \newlinetab and $\hat{\theta}_{n}$ is an unbiased estimator for $\theta$.\\
-    \newlinetab and $se = \sqrt{\text{Var}(\hat{\theta}_{n})}$. Can also use $\hat{se}$.\\
+    \newlinetab and $se = \sqrt{\text{Var}(\hat{\theta}_{n})}$. Can also use $\hat{se} =_{\text{eg.}} \sqrt{S_{n}^{2}/n}$.\\
     \newlinetab and if $\hat{\theta}_{n}$ efficient, can approx: $se \approx \sqrt{\frac{1}{I_{n}(\theta)}}$ or $\hat{se} \approx \sqrt{\frac{1}{I_{n}(\hat{\theta}_{n})}}$.
 
 \subsubsection*{Likelihood Ratio Test}
-For $H_{0}: \theta=\theta_{0}$ and $H_{1}: \theta\neq\theta_{0}$, reject $H_{0}$ if $\lambda(x^{n}) = \frac{L(\hat{\theta}_{0})}{L(\hat{\theta})} \leq c$.
+For $H_{0}: \theta\in\Theta_{0}$ and $H_{1}: \theta\notin\Theta_{0}$, reject $H_{0}$ if $\lambda(x^{n}) = \frac{L(\hat{\theta}_{0})}{L(\hat{\theta})} \leq c$.
     \newlinetab where $L(\hat{\theta}_{0}) = \sup_{\theta\in\Theta_{0}}L(\theta)$ and $L(\hat{\theta}) = \sup_{\theta\in\Theta}L(\theta)$.\\
     \newlinetab and $c$ chosen s.t. $\mathbb{P}(\lambda(x^{n}) \leq c) = \alpha$.\\
+    \newlinetab \textbf{Thm:} under $H_{0} : \theta=\theta_{0}$ $\implies$ $W_{n} = -2\text{log}\lambda(X^{n}) \rightsquigarrow \chi_{1}^{2}$\\
+        \newlinetab\newlinetab $\implies \lim_{n\rightarrow\infty} \mathbb{P}_{\theta_{0}}(W_{n} > \chi_{1,\alpha}^{2}) = \alpha$.\\
+    \newlinetab\newlinetab Also: for $\theta=(\theta_{1},\ldots,\theta_{k})$, if $H_{0}$ fixes some of the parameters\\
+    \newlinetab\newlinetab $\implies$ $-2\text{log}\lambda(X^{n}) \rightsquigarrow \chi_{\nu}^{2}$, where $\nu = \text{dim}(\Theta) - \text{dim}(\Theta_{0})$.
 
-Evaluating Tests\\
-Neyman-Pearson Test\\
-Wald Test\\
-Likelihood Ratio Test (LRT)\\
-p-values\\
-Permutation Test\\
+\subsubsection*{P-Values}
+The \textbf{p-value} $p(x^{n})$ is the smallest $\alpha$-level s.t. we reject $H_{0}$.\\
+\textbf{Thm:} For a test of the form: reject $H_{0}$ when $W(x^{n})>c$,\\
+    $\text{ }\hspace{1mm}$ $\implies$ $p(x^{n}) = \underset{\theta\in\Theta_{0}}{\sup} \mathbb{P}_{\theta}(W(X^{n}) \geq W(x^{n}))$
+    $=$ $\underset{\theta\in\Theta_{0}}{\sup} [1 - F(W(x^{n})|\theta)]$.\\
+\textbf{Thm:} Under $H_{0}:\theta=\theta_{0}$,\hspace{2mm}$p(x^{n}) \sim \text{Unif}(0,1)$.
+
+\subsubsection*{Permutation Test}
 
 \end{document}
