@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 DEC 2012 04:01
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 DEC 2012 14:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -685,22 +685,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 261--265
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 328--330
+Underfull \hbox (badness 10000) in paragraph at lines 334--338
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 498--502
+Underfull \hbox (badness 10000) in paragraph at lines 508--512
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 504--507
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 546--553
+Underfull \hbox (badness 10000) in paragraph at lines 514--517
 
  []
 
@@ -708,11 +703,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 546--553
 Here is how much of TeX's memory you used:
  3898 strings out of 493488
  49897 string characters out of 3141326
- 110832 words of memory out of 3000000
+ 114832 words of memory out of 3000000
  7171 multiletter control sequences out of 15000+200000
  12847 words of font info for 47 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,17n,32p,357b,182s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,18n,32p,270b,182s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts
 /enc/dvips/mnsymbol/MnSymbolB.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc
 /dvips/mnsymbol/MnSymbolE.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvi
@@ -735,7 +730,7 @@ local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loc
 al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/loca
 l/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/
 local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on stat705_final_studysheet.pdf (4 pages, 238758 bytes).
+Output written on stat705_final_studysheet.pdf (4 pages, 240045 bytes).
 PDF statistics:
  108 PDF objects out of 1000 (max. 8388607)
  86 compressed objects within 1 object stream
